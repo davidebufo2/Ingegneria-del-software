@@ -58,10 +58,11 @@
 			<tr>
 				<th>Password</th>
 				<td><input type="text" name="password" placeholder="password" value="<?php 
-					define("NUM_MIN",    0);define("NUM_MAX",    8);
+					define('NUM_MIN_PASS',    0);
+					define('NUM_MAX_PASS',    8);
 					$caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 					$stringaRandom = '';
-					for ($i = NUM_MIN; $i < NUM_MAX; $i++) {
+					for ($i = NUM_MIN_PASS; $i < NUM_MAX_PASS; $i++) {
 						$stringaRandom .= $caratteri[rand(0, strlen($caratteri) - 1)];
 					}
 					echo($stringaRandom);?>" required /></td>

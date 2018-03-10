@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php 
-$connect="";
+$connect='';
 require_once 'php_action/db_connect.php';
 
 	$email = $_GET['email'];
