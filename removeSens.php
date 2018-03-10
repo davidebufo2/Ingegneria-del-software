@@ -9,7 +9,7 @@
 	require_once 'php_action/db_connect.php';
 	$id = $_GET['id'];
 	$sql = "DELETE FROM sensore WHERE id ='".$id."';";
-	if(isset($sql)==true)//NON SERVE MA LO VUOLE KIUWAN
+	if(isset($sql)===true)//NON SERVE MA LO VUOLE KIUWAN
 	if($connect->query($sql) === true) {
 		header('location:./DashboardAmministratore.php?selezione=sensore');	
 	}
