@@ -6,7 +6,14 @@
 </head>
 <body>
 <?php 
-	require_once 'php_action/db_connect.php';
+	$localhost = "127.0.0.1";
+	$username = "root";
+	$password = "";
+	$dbname = "ingsw";
+
+	// create connection
+	$connect = new mysqli($localhost, $username, $password, $dbname);
+
 	$id = $_GET['id'];
 	$sql = '';
 	$sql = "DELETE FROM sensore WHERE id ='".$id."';";

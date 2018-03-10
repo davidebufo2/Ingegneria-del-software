@@ -6,7 +6,14 @@
 </head>
 <body>
 <?php 
-	require_once 'php_action/db_connect.php';
+	$localhost = "127.0.0.1";
+	$username = "root";
+	$password = "";
+	$dbname = "ingsw";
+
+	// create connection
+	$connect = new mysqli($localhost, $username, $password, $dbname);
+
 	$id_impianto = $_GET['id_impianto'];
 	$sql = '';
 	$sql .= "DELETE FROM impianto WHERE id_impianto ='".$id_impianto."';";
