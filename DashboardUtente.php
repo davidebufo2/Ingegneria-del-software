@@ -12,13 +12,14 @@
 <body>
 <?php
 	//$email = $_GET['email'];
-$email = "terry@gmail.com";
+$email = 'terry@gmail.com';
 	
-	$id_impianto="";
+	$id_impianto='';
 	require_once 'php_action/db_connect.php';
 	require_once 'Oggetti.php';
-	$sql = "SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;";
-	$result = $connect->query($sql);
+	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
+	if(isset($sql))
+		{$result = $connect->query($sql);}
 	
 	if($result->num_rows > 0) {
 		
@@ -74,28 +75,29 @@ HTML;
        
       <?php
 // definisco mittente e destinatario della mail
-$nome_mittente = "Mio Nome";
-$mail_mittente = "emaildiprovasmtp@gmail.com";
-$mail_destinatario = "emaildiprovasmtp@gmail.com";
+$nome_mittente = 'Mio Nome';
+$mail_mittente = 'emaildiprovasmtp@gmail.com';
+$mail_destinatario = 'emaildiprovasmtp@gmail.com';
 
 // definisco il subject
-$mail_oggetto = "Messaggio di prova";
+$mail_oggetto = 'Messaggio di prova';
 
 // definisco il messaggio formattato in HTML
-$mail_corpo = "
+$mail_corpo = '
 <html>
 <head>
   <title>Documento di sintesi</title>
 </head>
-<body>";
+<body>';
 
 
-	$id_impianto="";
+	$id_impianto='';
 	//require_once 'php_action/db_connect.php';
-	$sql = "SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;";
-	$result = $connect->query($sql);
+	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
+	if(isset($sql))
+		{$result = $connect->query($sql);}
 	
-	$mail_corpo = "<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>";
+	$mail_corpo = '<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>';
 
 	
 												/*****       MODALITA' TESTO LIBERO            ******/	
@@ -121,12 +123,12 @@ $mail_corpo = "
 		$result = $connect->query($sql);
 		while($row = $result->fetch_assoc()) {
 			$id_impianto=$row['id_impianto'];
-			$row2= $connect->query("SELECT * FROM sensore WHERE id_impianto=".$id_impianto.";");
-			$mail_corpo .= "<hr>Impianto:".$id_impianto."</hr>"."<tbody>";
+			$row2= $connect->query('SELECT * FROM sensore WHERE id_impianto='.$id_impianto.';');
+			$mail_corpo .= '<hr>Impianto:'.$id_impianto.'</hr>'.'<tbody>';
 			while ($obj = $row2->fetch_assoc()) {
-						$mail_corpo .= "<tr><td>".$obj['id']."</td><td>".$obj['marca']."</td><td>".$obj['tipo']."</td><td>".getSintesiSensore($obj['id'])."</td><td>";				
+						$mail_corpo .= '<tr><td>'.$obj['id'].'</td><td>'.$obj['marca'].'</td><td>'.$obj['tipo'].'</td><td>'.getSintesiSensore($obj['id']).'</td><td>';				
 			}
-			$mail_corpo .= "</tbody>";
+			$mail_corpo .= '</tbody>';
 		}
 	}
 $mail_corpo.='</tbody>	</table>';
@@ -135,19 +137,19 @@ $mail_corpo.='</tbody>	</table>';
 														/*****     FINE - MODALITA' TABELLA            ******/		
 		
 
-$mail_corpo.="</body></html>";
+$mail_corpo.='</body></html>';
 
 // aggiusto un po' le intestazioni della mail
 // E' in questa sezione che deve essere definito il mittente (From)
 // ed altri eventuali valori come Cc, Bcc, ReplyTo e X-Mailer
-$mail_headers = "From: " .  $nome_mittente . " <" .  $mail_mittente . ">\r\n";
-$mail_headers .= "Reply-To: " .  $mail_mittente . "\r\n";
-$mail_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+$mail_headers = 'From: ' .  $nome_mittente . ' <' .  $mail_mittente . '>\r\n';
+$mail_headers .= 'Reply-To: ' .  $mail_mittente . '\r\n';
+$mail_headers .= 'X-Mailer: PHP/' . phpversion() . '\r\n';
 
 // Aggiungo alle intestazioni della mail la definizione di MIME-Version,
 // Content-type e charset (necessarie per i contenuti in HTML)
-$mail_headers .= "MIME-Version: 1.0\r\n";
-$mail_headers .= "Content-type: text/html; charset=iso-8859-1";
+$mail_headers .= 'MIME-Version: 1.0\r\n';
+$mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 
 	
 																	/* DECOMMENTARE PER INVIARE LE MAIL

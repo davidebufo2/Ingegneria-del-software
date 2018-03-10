@@ -7,7 +7,7 @@
 <?php 
 	//$sensore_id=$_GET['id'];
 	$sensore_id=6;
-	require_once("Oggetti.php");
+	require_once"Oggetti.php";
 	echo (getStoricoSensore($sensore_id));
 	
 	

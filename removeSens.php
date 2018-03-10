@@ -9,12 +9,8 @@
 	require_once 'php_action/db_connect.php';
 	$id = $_GET['id'];
 	$sql = "DELETE FROM sensore WHERE id ='".$id."';";
-	if($connect->query($sql) === TRUE) {
-		echo "<p>Successfully removed!!</p>";
-		//echo "<a href='./DashboardAmministratore.php?selezione=sensore'><button type='button'>Indietro</button></a>";
+	if($connect->query($sql) === true) {
 		header("location:./DashboardAmministratore.php?selezione=sensore");	
-	} else {
-		echo "Error updating record : " . $connect->error;
 	}
 	$connect->close();
 	?>

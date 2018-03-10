@@ -26,7 +26,7 @@
 
 			if($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					echo "<tr id='cell'>
+					$str= "<tr id='cell'>
 						<td>ID:".$row['id_impianto']." Nome:".$row['nome']."</td>
 						<td>".$row['emailProprietario']."</td>
 						<td>".$row['locazione']."</td>
@@ -36,9 +36,11 @@
 							<a href='removeImp.php?id_impianto=".$row['id_impianto']."'><button type='button' id='button_del'>Elimina</button></a>
 						</td>
 					</tr>";
+					echo($str);
 				}
 			} else {
-				echo "<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+				$str="<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+				echo($str);				
 			}
 			?>
 		</tbody>

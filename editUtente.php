@@ -2,7 +2,7 @@
 
 require_once 'php_action/db_connect.php';
 
-if($_GET['email']) {
+if(isset($_GET['email'])===true) {
 	$email = $_GET['email'];
 	$result = $connect->query("SELECT * FROM utente WHERE email='".$email."';");
 

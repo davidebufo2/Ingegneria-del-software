@@ -8,9 +8,9 @@
 
 <body>
 <?php 
-	if(isset($_GET["nuovaMail"])){
+	if(isset($_GET['nuovaMail'])){
 	require_once 'php_action/db_connect.php';
-	$str="";
+	$str='';
 	$sql = "SELECT * FROM utente WHERE email='".$_GET['email']."';";
 	$result = $connect->query($sql);
 	if($result->num_rows > 0){
@@ -18,7 +18,7 @@
 		$str=$row['emailTerzi'];
 	}
 		
-	$emailTerzo=$_GET["emailTerzo"];
+	$emailTerzo=$_GET['emailTerzo'];
 	$str=str_replace(",$emailTerzo","",$str);	//3 casi virgola pre-post-non
 	$str=str_replace("$emailTerzo,","",$str);
 	$str=str_replace("$emailTerzo","",$str);
@@ -27,7 +27,6 @@
 	$connect->close();
 	header("location:VediTerzi.php?email=".$_GET['email']);
 	}
-		
 	
 	
 	?>

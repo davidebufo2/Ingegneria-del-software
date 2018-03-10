@@ -2,7 +2,7 @@
 
 require_once 'php_action/db_connect.php';
 
-if($_GET['id_impianto']) {
+if(isset($_GET['id_impianto'])===true) {
 	$id_impianto = $_GET['id_impianto'];
 	$result = $connect->query("SELECT * FROM impianto WHERE id_impianto='".$id_impianto."';");
 
@@ -34,36 +34,18 @@ if($_GET['id_impianto']) {
 <body>
 
 <fieldset>
-	<legend>Edit Member</legend>
+	<legend>Modifica impianto</legend>
 
-	<form action="php_action/update.php" method="post">
-	<input type="hidden" name="selezione" value="impianto" />
+	<form action="php_action_Imp/update.php" method="post">
 		<table cellspacing="0" cellpadding="0">
 			<tr>
 				<th>Nome</th>
 				<td><input type="text" name="nome" placeholder="Serra Borgobello" value="<?php echo $data['nome'] ?>" /></td>
-			
+			</tr>		
 			<tr>
-				<th>Email proprietario</th>
-				<td>
-			     <input list="emailProprietario" name="emailProprietario" placeholder="rossi@dom.it" value="<?php echo $data['emailProprietario'] ?>">
-				  <datalist id="emailProprietario">
-				  <?php 
-					require_once 'php_action_Sens/db_connect.php';
-					$sql = "SELECT * FROM utente ;";
-					$result = $connect->query($sql);
-
-					if($result->num_rows > 0) {
-						while($row = $result->fetch_assoc()) {
-							echo "<option value=".$row['email'].">";
-						}
-					}
-					  ?>
-				  </datalist>
-				</td>
+				<th>Email Proprietario</th>
+				<td><input type="text" name="emailProprietario" placeholder="rossi@dom.it" value="<?php echo $data['emailProprietario'] ?>"/></td>
 			</tr>
-			
-			
 			<tr>
 				<th>Locazione</th>
 				<td><input type="text" name="locazione" placeholder="Citta, via" value="<?php echo $data['locazione'] ?>"/></td>
@@ -71,7 +53,7 @@ if($_GET['id_impianto']) {
 			</tr>
 			<tr>
 				<td><button type="submit">Save Changes</button></td>
-				<td><a href="DashboardAmministratore.php?selezione=impianto"><button type="button">Back</button></a></td>
+				<td><a href="DashboardAmministratore.php"><button type="button">Back</button></a></td>
 			</tr>
 		</table>
 	</form>

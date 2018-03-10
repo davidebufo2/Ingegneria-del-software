@@ -12,10 +12,6 @@
 
 /*-- CONNESSIONE MYSQL host, utente, password, nomeDB ---*/
 	$mysqli = new mysqli('localhost', 'root', '', 'ingsw');
-    if ($mysqli->connect_error) {
-        die('Errore di connessione (' . $mysqli->connect_errno . ') '
-        . $mysqli->connect_error);
-    } 
 	
 /* ----- Convalida Login ------- */
 	$email = $_POST["email"];

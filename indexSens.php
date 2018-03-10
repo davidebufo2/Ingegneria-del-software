@@ -26,7 +26,7 @@
 
 			if($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					echo "<tr id='cell'>
+					$str= "<tr id='cell'>
 						<td>ID:".$row['id']." ID_impianto:".$row['id_impianto']."</td>
 						<td>".$row['marca']."</td>
 						<td>".$row['tipo']."</td>
@@ -35,9 +35,11 @@
 							<a href='removeSens.php?id=".$row['id']."'><button type='button' id='button_del'>Elimina</button></a>
 						</td>
 					</tr>";
+					echo($str);	
 				}
 			} else {
-				echo "<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+				$str="<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+				echo($str);		
 			}
 			?>
 		</tbody>

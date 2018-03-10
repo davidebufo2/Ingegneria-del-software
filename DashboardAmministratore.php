@@ -10,27 +10,27 @@
 
 <body>
 
-<?php	$selezione="sensore"; //Default
-	if(isset($_GET["selezione"])){
-		$selezione=$_GET["selezione"];
+<?php	$selezione='sensore'; //Default
+	if(isset($_GET['selezione'])){
+		$selezione=$_GET['selezione'];
 	}
 	 ?>
 <div class="container">
   <p>Seleziona dove operare..</p>
   <ul class="nav nav-tabs">
-    <li <?php	if($selezione=="sensore")echo 'class="active"'; ?>><a data-toggle="tab" href="#sensor">Sensore</a></li>
-    <li <?php	if($selezione=="impianto")echo 'class="active"'; ?>><a data-toggle="tab" href="#impianto">Impianto</a></li>
-    <li <?php	if($selezione=="utente")echo 'class="active"'; ?>><a data-toggle="tab" href="#utente">Utente</a></li>
+    <li <?php	if($selezione==='sensore')echo 'class="active"'; ?>><a data-toggle="tab" href='#sensor'>Sensore</a></li>
+    <li <?php	if($selezione==='impianto')echo 'class="active"'; ?>><a data-toggle="tab" href='#impianto'>Impianto</a></li>
+    <li <?php	if($selezione==='utente')echo 'class="active"'; ?>><a data-toggle="tab" href='#utente'>Utente</a></li>
   </ul>
   <div class="tab-content">
-    <div id="sensor" class="tab-pane fade <?php	if($selezione=="sensore")echo 'in active'; ?> ">
-      <p<?php	include("indexSens.php") ?>.</p>
+    <div id="sensor" class="tab-pane fade <?php	if($selezione=='sensore')echo 'in active'; ?> ">
+      <p<?php	include"indexSens.php" ?>.</p>
     </div>
-    <div id="impianto" class="tab-pane fade <?php	if($selezione=="impianto")echo 'in active'; ?> ">
-      <p><?php	include("indexImp.php") ?></p>
+    <div id="impianto" class="tab-pane fade <?php	if($selezione=='impianto')echo 'in active'; ?> ">
+      <p><?php	include"indexImp.php" ?></p>
     </div>
-    <div id="utente" class="tab-pane fade  <?php	if($selezione=="utente")echo 'in active'; ?> ">
-      <p><?php	include("indexUtente.php") ?></p>
+    <div id="utente" class="tab-pane fade  <?php	if($selezione=='utente')echo 'in active'; ?> ">
+      <p><?php	include"indexUtente.php" ?></p>
     </div>
   </div>
 </div>
