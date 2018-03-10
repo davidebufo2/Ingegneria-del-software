@@ -31,39 +31,35 @@ HTML;
 		
 		while($row = $result->fetch_assoc()) {
 			$id_impianto=$row['id_impianto'];
-			$str='<li role="presentation"><a href="#'.$id_impianto.'" data-toggle="tab" role="tab" aria-controls="id_impianto">Impianto:'.$row['nome'].'</a></li>';	
-			echo $str;	
+			echo ($str='<li role="presentation"><a href="#'.$id_impianto.'" data-toggle="tab" role="tab" aria-controls="id_impianto">Impianto:'.$row['nome'].'</a></li>');	
 		}
-		echo'</ul>';
+		echo($str='</ul>');
 		
 		
 		$result = $connect->query($sql);
-		echo '<div id="tabContent1" class="tab-content">';	
+		echo($str='<div id="tabContent1" class="tab-content">');	
 
 		while($row = $result->fetch_assoc()) {
 			$id_impianto=$row['id_impianto'];
 			
-			echo '<div role="tabpanel" class="tab-pane fade " id='.$id_impianto.'>';
-				echo '<div style=" position: absolute; border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);  left: 0%; background-color: hsla(0,0%,0%,0.4)">';
-				$row2= $connect->query("SELECT * FROM sensore WHERE id_impianto=".$id_impianto.";");
+			echo($str='<div role="tabpanel" class="tab-pane fade " id='.$id_impianto.'><div style=" position: absolute; border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);  left: 0%; background-color: hsla(0,0%,0%,0.4)">');
+			$row2= $connect->query("SELECT * FROM sensore WHERE id_impianto=".$id_impianto.";");
 			
 			while ($obj = $row2->fetch_object()) {
 						printf ("Tipo:%s  Valore:%s  Marca:%s ".getSintesiSensore($obj->id)."<hr>" ,
 								$obj->tipo, $obj->id, $obj->marca  );
 				/*		inserire storico sensore		*/
 			}
-			echo '</div> ';
+			echo($str='</div> ');
 			$row2->close();	
 			
-			echo ' </div> ';
-		}echo '<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)">';
-		echo '</div>';
-			
-		echo '</div>';
-		
-		echo '<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
+			echo($str='</div> ');
+		}echo($str='<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)">');
+		echo($str='</div> </div> ');
+					
+		echo($str='<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
 		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email='.$email.'"><button type="button" id="terziBtn">Terzi</button></a></footer>
-		';
+		');
 		
 	}
 	?>
