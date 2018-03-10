@@ -32,13 +32,14 @@
 			     <input list="id_impianto" name="id_impianto" placeholder="id dell'impianto">
 				  <datalist id="id_impianto">
 				  <?php 
+					$connect='';
 					require_once 'php_action/db_connect.php';
-					$sql = "SELECT * FROM impianto ;";
+					$sql = 'SELECT * FROM impianto ;';
 					$result = $connect->query($sql);
 
 					if($result->num_rows > 0) {
 						while($row = $result->fetch_assoc()) {
-							echo "<option value=".$row['id_impianto'].">";
+							echo '<option value=',$row['id_impianto'],'>';
 						}
 					}
 					  ?>
