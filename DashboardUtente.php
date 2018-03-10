@@ -22,11 +22,17 @@ $email = "terry@gmail.com";
 	
 	if($result->num_rows > 0) {
 		
-		echo "<div role='tabpanel'>Seleziona l'impianto
-  				<ul class='nav nav-tabs' role='tablist'>";
+
+$str = <<<HTML
+<div role='tabpanel'>Seleziona l'impianto<ul class='nav nav-tabs' role='tablist'>
+HTML;
+   echo $str;
+		
+		
 		while($row = $result->fetch_assoc()) {
 			$id_impianto=$row['id_impianto'];
-			echo '<li role="presentation"><a href="#'.$id_impianto.'" data-toggle="tab" role="tab" aria-controls="id_impianto">Impianto:'.$row['nome'].'</a></li>';	
+			$str='<li role="presentation"><a href="#'.$id_impianto.'" data-toggle="tab" role="tab" aria-controls="id_impianto">Impianto:'.$row['nome'].'</a></li>';	
+			echo $str;	
 		}
 		echo'</ul>';
 		
