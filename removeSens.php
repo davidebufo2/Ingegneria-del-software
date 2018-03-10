@@ -10,7 +10,7 @@
 	$id = $_GET['id'];
 	$sql = "DELETE FROM sensore WHERE id ='".$id."';";
 	if($connect->query($sql) === true) {
-		header("location:./DashboardAmministratore.php?selezione=sensore");	
+		header('location:./DashboardAmministratore.php?selezione=sensore');	
 	}
 	$connect->close();
 	?>

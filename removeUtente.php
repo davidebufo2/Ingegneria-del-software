@@ -12,7 +12,7 @@
 	if($connect->query($sql) === true) {
 		$str="<a href='./DashboardAmministratore.php?selezione=utente'><button type='button'>Indietro</button></a>";
 		echo($str);
-		header("location:./DashboardAmministratore.php?selezione=utente");
+		header('location:./DashboardAmministratore.php?selezione=utente');
 	} 
 	$connect->close();
 	?>

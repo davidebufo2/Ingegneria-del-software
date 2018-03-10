@@ -10,7 +10,7 @@
 	$id_impianto = $_GET['id_impianto'];
 	$sql = "DELETE FROM impianto WHERE id_impianto ='".$id_impianto."';";
 	if($connect->query($sql) === true) {
-		header("location:./DashboardAmministratore.php?selezione=impianto");	
+		header('location:./DashboardAmministratore.php?selezione=impianto');	
 	} 
 	$connect->close();
 	?>

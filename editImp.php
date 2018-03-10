@@ -36,7 +36,8 @@ if(isset($_GET['id_impianto'])===true) {
 <fieldset>
 	<legend>Modifica impianto</legend>
 
-	<form action="php_action_Imp/update.php" method="post">
+	<form action="php_action/update.php" method="post">
+	<input type="hidden" name="selezione" value="impianto" />
 		<table cellspacing="0" cellpadding="0">
 			<tr>
 				<th>Nome</th>
