@@ -8,8 +8,8 @@
 <?php 
 	require_once 'php_action/db_connect.php';
 	$id_impianto = $_GET['id_impianto'];
-	$sql = "";
-	$sql = "DELETE FROM impianto WHERE id_impianto ='".$id_impianto."';";
+	$sql = '';
+	$sql .= "DELETE FROM impianto WHERE id_impianto ='".$id_impianto."';";
 	if(isset($sql)===true)//NON SERVE MA LO VUOLE KIUWAN
 	if($connect->query($sql) === true) {
 		header('location:./DashboardAmministratore.php?selezione=impianto');	

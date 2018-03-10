@@ -8,7 +8,7 @@
 <?php 
 	require_once 'php_action/db_connect.php';
 	$email = $_GET['email'];
-	$sql = "";
+	$sql = '';
 	$sql = "DELETE FROM utente WHERE email ='".$email."';";
 	if(isset($sql)===true)//NON SERVE MA LO VUOLE KIUWAN
 	if($connect->query($sql) === true) {
