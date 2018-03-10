@@ -16,9 +16,16 @@
 /* ----- Convalida Login ------- */
 	$email = $_POST["email"];
 	$password = $_POST['pswd'];
-	$query = $mysqli->query("SELECT * FROM utente 
-							 WHERE email = '$email' AND 
-							 password = '$password' "  );
+	
+	$str = sprintf(
+  "SELECT * FROM utente  WHERE email = '%s' AND 
+							 password = '%s' ",
+		$email,$password);
+	
+	$query = $mysqli->query($str);
+	//$query = $mysqli->query("SELECT * FROM utente 
+	//						 WHERE email = '$email' AND 
+	//						 password = '$password' "  );
 	if($query->num_rows)
 	{
 		
