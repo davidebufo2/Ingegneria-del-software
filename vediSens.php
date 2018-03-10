@@ -35,7 +35,7 @@
 							<a href='removeSens.php?id=".$row['id']."'><button type='button' id='button_del'>Elimina</button></a>
 						</td>
 					</tr>";
-					echo($str);
+					echo htmlspecialchars($str);
 				}
 			} else {
 				$str= "<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
