@@ -1,10 +1,19 @@
 <?php 
-					define('NUM_MIN_PASS',    0);
 					define('NUM_MAX_PASS',    8);
-					$caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-					$stringaRandom = '';
-					for ($i = NUM_MIN_PASS; $i < NUM_MAX_PASS; $i++) {
-						$stringaRandom .= $caratteri[rand(0, strlen($caratteri) - 1)];
-					}
-					echo($stringaRandom);
+					$pasStr='';
+					$pasStr .= $createReceiptToken(NUM_MAX_PASS);
+					echo($pasStr);
+
+
+function createReceiptToken($length = 16) {
+  $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charsLength = strlen($chars);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+    $i = rand(0, $charsLength - 1); // VIOLATION, stronger PRNG needed here
+    $randomString .= $characters[$i];
+  }
+  return $randomString;
+}
+
 ?>
