@@ -26,16 +26,18 @@
 				$row = $result->fetch_assoc() ;
 				$elementi = explode(',', $row['emailTerzi']);//Separa
 				foreach ($elementi as $terzo) {
-					echo "<tr id='cell'>
+					$str= "<tr id='cell'>
 						<td>".$terzo."</td>
 						<td>
 							<a href='removeTerzo.php?emailTerzo=".$terzo."&email=".$email."'><button type='button' id='button_del'>Elimina</button></a>
 							<a href='editTerzo.php?emailTerzo=".$terzo."&email=".$email."'><button type='button' id='button_mod'>Modifica</button></a>
 						</td>
 					</tr>";
+					echo($str);
 				}
 			} else {
-				echo "<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+				$str="<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+				echo($str);
 			}
 		?>
 		</tbody>
