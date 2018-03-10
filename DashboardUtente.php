@@ -94,6 +94,7 @@ $mail_corpo = '
 	$id_impianto='';
 	//require_once 'php_action/db_connect.php';
 	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
+	$result='';//kiuwan
 	if(isset($sql)===true)
 		{$result = $connect->query($sql);}
 	
