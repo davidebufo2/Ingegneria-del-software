@@ -13,14 +13,14 @@
 <?php
 	//$email = $_GET['email'];
 $email = 'terry@gmail.com';
-	
+	$result='';
 	$id_impianto='';
 	require_once 'php_action/db_connect.php';
 	require_once 'Oggetti.php';
 	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
-	if(isset($sql))
+	if(isset($sql)===true)
 		{$result = $connect->query($sql);}
-	
+
 	if($result->num_rows > 0) {
 		
 
@@ -47,10 +47,10 @@ HTML;
 			$id_impianto=$row['id_impianto'];
 			$str='<div role="tabpanel" class="tab-pane fade " id='.$id_impianto.'><div style=" position: absolute; border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);  left: 0%; background-color: hsla(0,0%,0%,0.4)">';
 			echo($str);
-			$row2= $connect->query("SELECT * FROM sensore WHERE id_impianto=".$id_impianto.";");
+			$row2= $connect->query('SELECT * FROM sensore WHERE id_impianto='.$id_impianto.';');
 			
 			while ($obj = $row2->fetch_object()) {
-						printf ("Tipo:%s  Valore:%s  Marca:%s ".getSintesiSensore($obj->id)."<hr>" ,
+						printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
 								$obj->tipo, $obj->id, $obj->marca  );
 				/*		inserire storico sensore		*/
 			}
@@ -94,7 +94,7 @@ $mail_corpo = '
 	$id_impianto='';
 	//require_once 'php_action/db_connect.php';
 	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
-	if(isset($sql))
+	if(isset($sql)===true)
 		{$result = $connect->query($sql);}
 	
 	$mail_corpo = '<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>';
