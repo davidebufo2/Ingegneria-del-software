@@ -19,7 +19,7 @@
 <div class="container">
   <p>Seleziona dove operare..</p>
   <ul class="nav nav-tabs">
-    <li <?php	if($selezione==='sensore')echo 'class="active"'; ?>><a data-toggle="tab" href='#sensor'>Sensore</a></li>
+    <li <?php $selezione=$selezione;	if($selezione==='sensore')echo 'class="active"'; ?>><a data-toggle="tab" href='#sensor'>Sensore</a></li>
     <li <?php	if($selezione==='impianto')echo 'class="active"'; ?>><a data-toggle="tab" href='#impianto'>Impianto</a></li>
     <li <?php	if($selezione==='utente')echo 'class="active"'; ?>><a data-toggle="tab" href='#utente'>Utente</a></li>
   </ul>
