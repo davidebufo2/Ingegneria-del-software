@@ -10,8 +10,9 @@
 
 <body>
 
-<?php	$selezione="sensore"; //Default
-	if(isset($_GET['selezione'])){
+<?php	
+	$selezione='sensore'; //Default
+	if(isset($_GET['selezione'])===true){
 		$selezione=$_GET['selezione'];
 	}
 	 ?>
@@ -105,15 +106,15 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM impianto ;";
+			$sql = 'SELECT * FROM impianto ;';
 			$result = $connect->query($sql);
 
 			if($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					$str= "<tr id='cell'>
-						<td>ID:".$row['id_impianto']." Nome:".$row['nome']."</td>
-						<td>".$row['emailProprietario']."</td>
-						<td>".$row['locazione']."</td>
+						<td>ID:".$row['id_impianto'].' Nome:'.$row['nome'].'</td>
+						<td>'.$row['emailProprietario'].'</td>
+						<td>'.$row['locazione']."</td>
 						<td>
 							<a href='editImp.php?id_impianto=".$row['id_impianto']."'><button type='button' id='button_mod'>Modifica</button></a>
 							<a href='vediSens.php?id_impianto=".$row['id_impianto']."'><button type='button' id='button_view'>Vedi Sensori</button></a>
@@ -163,15 +164,15 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM utente ;";
+			$sql = 'SELECT * FROM utente ;';
 			$result = $connect->query($sql);
 
 			if($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					$str= "<tr id='cell'>
-						<td>".$row['nome']." ".$row['cognome']."</td>
-						<td>".$row['email']."</td>
-						<td>".$row['telefono']."</td>
+						<td>".$row['nome'].' '.$row['cognome'].'</td>
+						<td>'.$row['email'].'</td>
+						<td>'.$row['telefono']."</td>
 						<td>
 							<a href='editUtente.php?email=".$row['email']."'><button type='button' id='button_mod'>Modifica</button></a>
 							<a href='VediTerzi.php?email=".$row['email']."'><button type='button' id='button_view'>Vedi terzi</button></a>
