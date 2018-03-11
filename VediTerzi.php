@@ -41,7 +41,7 @@
 			}
 		?>
 		</tbody>
-		<a href="<?php echo "createTerzo.php?emailTerzo=".$row['emailTerzi']."&email=".$email ?>"><button type="button">Aggiungi terzo</button></a>
+		<a href="<?php echo "createTerzo.php?emailTerzo=",$row['emailTerzi'],"&email=",$email ?>"><button type="button">Aggiungi terzo</button></a>
 	</table>
 </div>
 			
