@@ -35,11 +35,16 @@ if($selezione==='impianto'){
 	$emailProprietario = $_POST['emailProprietario'];
 	$locazione = $_POST['locazione'];
 	$nome = $_POST['nome'];	
-	
+	/*
 	$sql = "INSERT INTO impianto ( emailProprietario, nome, locazione) VALUES ('$emailProprietario', '$nome', '$locazione');";
+	*/	
+	$sql = sprintf("INSERT INTO impianto ( emailProprietario, nome, locazione) VALUES ('%s', '%s', '%s')",
+    $connect->real_escape_string($emailProprietario),
+    $connect->real_escape_string($nome),    
+    $connect->real_escape_string($locazione)	);
+	/*Fine alternativa*/	
 	if($connect->query($sql) === TRUE) {
 		echo '<p>New Record Successfully Created</p>';
-		//header('location:../indexImp.php');	
 		header('location:../DashboardAmministratore.php?selezione=impianto');	
 	} else {
 		echo 'Error ' . $sql . ' ' . $connect->connect_error;
