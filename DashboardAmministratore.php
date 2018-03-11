@@ -18,13 +18,13 @@
 	 ?>
 <div class="container">
   <p>Seleziona dove operare..</p>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs">	
     <li <?php $selezione=$selezione;	if($selezione==='sensore')echo 'class="active"'; ?>><a data-toggle="tab" href='#sensor'>Sensore</a></li>
-    <li <?php	if($selezione==='impianto')echo 'class="active"'; ?>><a data-toggle="tab" href='#impianto'>Impianto</a></li>
-    <li <?php	if($selezione==='utente')echo 'class="active"'; ?>><a data-toggle="tab" href='#utente'>Utente</a></li>
+    <li <?php $selezione=$selezione;	if($selezione==='impianto')echo 'class="active"'; ?>><a data-toggle="tab" href='#impianto'>Impianto</a></li>
+    <li <?php $selezione=$selezione; if($selezione==='utente')echo 'class="active"'; ?>><a data-toggle="tab" href='#utente'>Utente</a></li>
   </ul>
   <div class="tab-content">
-    <div id="sensor" class="tab-pane fade <?php	if($selezione==='sensore')echo 'in active'; ?> ">
+    <div id="sensor" class="tab-pane fade <?php $selezione=$selezione;	if($selezione==='sensore')echo 'in active'; ?> ">
       <p>
       <!---			SENSORI		---->
 <?php require_once 'php_action/db_connect.php'; ?>
@@ -83,7 +83,7 @@
      
     
        <!---			IMPIANTO		---->   
-    <div id="impianto" class="tab-pane fade <?php	if($selezione==='impianto')echo 'in active'; ?> ">
+    <div id="impianto" class="tab-pane fade <?php $selezione=$selezione;	if($selezione==='impianto')echo 'in active'; ?> ">
       <p>
 <?php require_once 'php_action/db_connect.php'; ?>
 <!DOCTYPE html>
@@ -141,7 +141,7 @@
     
    
        <!---			UTENTE		---->    
-    <div id="utente" class="tab-pane fade  <?php	if($selezione==='utente')echo 'in active'; ?> ">
+    <div id="utente" class="tab-pane fade  <?php $selezione=$selezione;	if($selezione==='utente')echo 'in active'; ?> ">
       <p>
 <?php require_once 'php_action/db_connect.php'; ?>
 <!DOCTYPE html>
