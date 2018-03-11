@@ -29,8 +29,8 @@
 					$str= "<tr id='cell'>
 						<td>".$terzo."</td>
 						<td>
-							<a href='removeTerzo.php?emailTerzo=".$terzo."&email=".$email."'><button type='button' id='button_del'>Elimina</button></a>
-							<a href='editTerzo.php?emailTerzo=".$terzo."&email=".$email."'><button type='button' id='button_mod'>Modifica</button></a>
+							<a href='removeTerzo.php?emailTerzo=".$terzo.'&email='.$email."'><button type='button' id='button_del'>Elimina</button></a>
+							<a href='editTerzo.php?emailTerzo=".$terzo.'&email='.$email."'><button type='button' id='button_mod'>Modifica</button></a>
 						</td>
 					</tr>";
 					echo($str);
@@ -41,7 +41,7 @@
 			}
 		?>
 		</tbody>
-		<a href="<?php echo "createTerzo.php?emailTerzo=",$row['emailTerzi'],"&email=",$email ?>"><button type="button">Aggiungi terzo</button></a>
+		<a href="<?php echo "createTerzo.php?emailTerzo=",$row['emailTerzi'],'&email=',$email ?>"><button type="button">Aggiungi terzo</button></a>
 	</table>
 </div>
 			
