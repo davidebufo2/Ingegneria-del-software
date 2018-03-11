@@ -12,11 +12,11 @@
 <body>
 <?php
 	//$email = $_GET['email'];
-$email = 'terry@gmail.com';
+	$email = 'terry@gmail.com';
 	$result='';
 	$id_impianto='';
 	require_once 'php_action/db_connect.php';
-	require_once 'Oggetti.php';
+	//require_once 'Oggetti.php';
 	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
 	if(isset($sql)===true)
 		{$result = $connect->query($sql);}
@@ -48,17 +48,13 @@ HTML;
 			$str='<div role="tabpanel" class="tab-pane fade " id='.$id_impianto.'><div style=" position: absolute; border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);  left: 0%; background-color: hsla(0,0%,0%,0.4)">';
 			echo($str);
 			$row2= $connect->query('SELECT * FROM sensore WHERE id_impianto='.$id_impianto.';');
-			
 			while ($obj = $row2->fetch_object()) {
 						printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
 								$obj->tipo, $obj->id, $obj->marca  );
 				/*		inserire storico sensore		*/
 			}
-			$str='</div> ';
-			echo($str);
+			$str='</div></div> ';
 			$row2->close();	
-			
-			$str='</div> ';
 			echo($str);
 		}
 		$str='<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>';
@@ -199,6 +195,52 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 		 $mysqliDB->close();
 		 return("Media:".$media." Eccezioni:".$eccezioni);
 	}*/
+	
+	
+function getStoricoSensore($sensore){
+		 
+		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
+	  	 $myquery=$mysqliDB->query("SELECT valore,data FROM rilevazione WHERE id_sensore=$sensore;"); 
+		 $string="";
+		/*fetch object array */
+		  while ($obj = $myquery->fetch_object()) { 
+			  $string.="In data:".($obj->data)." Valore:".(floatval(substr($obj->valore,10,19)))."<br />";
+			  
+		  }
+		 echo($string);
+		/* free row set */
+		 $myquery->close();	
+		 $mysqliDB->close();
+		return($string);
+	}
+		
+	function getSintesiSensore($sensore){	
+		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
+	  	 $myquery=$mysqliDB->query("SELECT valore FROM rilevazione WHERE id_sensore=$sensore;"); 
+		 $media=0;
+		 $count=1;
+		 $eccezioni=0;
+		/*fetch object array */
+		  while ($obj = $myquery->fetch_object()) { 
+			  $string=substr($obj->valore, 10, 19);
+			  $media+=floatval($string);
+			  $count++;
+			  if (preg_match("/[^0-9]/", $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
+					//echo "eccezzione nel valore:$string<br \>";
+				  	$eccezioni++;
+				}
+		  }
+		 $media/=$count;
+		// echo("Media:".$media);
+		// echo(" Eccezioni:".$eccezioni);
+		  
+			/* free row set */
+		 $myquery->close();	
+		 $mysqliDB->close();
+		 return("Media:".$media." Eccezioni:".$eccezioni);
+	}
+
+	
 ?>
  </div>
 </body>

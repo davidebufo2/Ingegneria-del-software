@@ -55,7 +55,19 @@ if($selezione==='sensore'){
 	$marca = $_POST['marca'];
 	$tipo = $_POST['tipo'];	
 	
-	$sql = "INSERT INTO sensore ( id_impianto, tipo, marca) VALUES ('$id_impianto', '$tipo', '$marca');";
+	//$sql = "INSERT INTO sensore ( id_impianto, tipo, marca) VALUES ('$id_impianto', '$tipo', '$marca');";
+	// prepare and bind
+	$stmt = $connect->prepare("INSERT INTO sensore ( id_impianto, tipo, marca) VALUES (?, ?, ?)");
+	$stmt->bind_param("iss", $id_impianto, $tipo, $marca);
+
+// set parameters and execute	
+	$id_impianto = $_POST['id_impianto'];
+	$marca = $_POST['marca'];
+	$tipo = $_POST['tipo'];	
+	$stmt->execute();	
+	header('location:../DashboardAmministratore.php?selezione=sensore');	
+
+	/*	
 	if($connect->query($sql) === TRUE) {
 		echo '<p>New Record Successfully Created</p>';
 		echo "<p>'$id_impianto', '$tipo', '$marca'</p>";
@@ -63,7 +75,7 @@ if($selezione==='sensore'){
 		header('location:../DashboardAmministratore.php?selezione=sensore');	
 	} else {
 		echo 'Error ' . $sql . ' ' . $connect->connect_error;
-	}
+	}*/
 	$connect->close();
 }
 }
