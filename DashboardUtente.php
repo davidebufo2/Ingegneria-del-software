@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -173,28 +173,7 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 //mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
 
 	
-/*	function getSintesiSensore($sensore){	
-		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-	  	 $myquery=$mysqliDB->query("SELECT valore FROM rilevazione WHERE id_sensore=$sensore;"); 
-		 $media=0;
-		 $count=1;
-		 $eccezioni=0;
-		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, 10, 19);
-			  $media+=floatval($string);
-			  $count++;
-			  if (preg_match("/[^0-9]/", $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
-					//echo "eccezzione nel valore:$string<br \>";
-				  	$eccezioni++;
-				}
-		  }
-		 $media/=$count;
-		  
-			
-		 $myquery->close();	
-		 $mysqliDB->close();
-		 return("Media:".$media." Eccezioni:".$eccezioni);
-	}*/
+
 	
 	
 function getStoricoSensore($sensore){
