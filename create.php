@@ -5,13 +5,13 @@
 require_once 'db_connect.php';
 $selezione=$_POST['selezione'];
 if($selezione==='utente'){
-	if($_POST) {
+	if(isset($_POST) === true ) {
 	$nome = $_POST['nome'];
 	$cognome = $_POST['cognome'];
 	$email = $_POST['email'];
 	$telefono = $_POST['telefono'];	
 	$Amministratore = $_POST['Amministratore'];
-		if($Amministratore=='vero'){
+		if($Amministratore==='vero'){
 			$Amministratore=1;
 		}
 		else $Amministratore=0;
@@ -19,19 +19,19 @@ if($selezione==='utente'){
 	$password = $_POST['password'];
 
 	$sql = "INSERT INTO utente (nome, cognome, telefono, email, Amministratore, emailTerzi, password) VALUES ('$nome', '$cognome', '$telefono', '$email', '$Amministratore', '$emailTerzi', '$password')";
-	if($connect->query($sql) === TRUE) {
-		echo '<p>New Record Successfully Created</p>';
+		
+	if($connect->query($sql) === true) {
 		//header('location:../indexUtente.php');	
 		header('location:../DashboardAmministratore.php?selezione=utente');	
 	} else {
-		echo 'Error ' . $sql . ' ' . $connect->connect_error;
+		echo 'Error ' , $sql , ' ' , $connect->connect_error;
 	}
 	$connect->close();
 	}
 }
 
 if($selezione==='impianto'){
-	if($_POST) {
+	if(isset($_POST) === true ) {
 	$emailProprietario = $_POST['emailProprietario'];
 	$locazione = $_POST['locazione'];
 	$nome = $_POST['nome'];	
@@ -43,11 +43,10 @@ if($selezione==='impianto'){
     $connect->real_escape_string($nome),    
     $connect->real_escape_string($locazione)	);
 	/*Fine alternativa*/	
-	if($connect->query($sql) === TRUE) {
-		echo '<p>New Record Successfully Created</p>';
+	if($connect->query($sql) === true) {
 		header('location:../DashboardAmministratore.php?selezione=impianto');	
 	} else {
-		echo 'Error ' . $sql . ' ' . $connect->connect_error;
+		echo 'Error ' , $sql , ' ' , $connect->connect_error;
 	}
 	$connect->close();
 }
@@ -55,15 +54,15 @@ if($selezione==='impianto'){
 
 
 if($selezione==='sensore'){
-	if($_POST) {
+	if(isset($_POST) === true ) {
 	$id_impianto = $_POST['id_impianto'];
 	$marca = $_POST['marca'];
 	$tipo = $_POST['tipo'];	
 	
 	//$sql = "INSERT INTO sensore ( id_impianto, tipo, marca) VALUES ('$id_impianto', '$tipo', '$marca');";
 	// prepare and bind
-	$stmt = $connect->prepare("INSERT INTO sensore ( id_impianto, tipo, marca) VALUES (?, ?, ?)");
-	$stmt->bind_param("iss", $id_impianto, $tipo, $marca);
+	$stmt = $connect->prepare('INSERT INTO sensore ( id_impianto, tipo, marca) VALUES (?, ?, ?)');
+	$stmt->bind_param('iss', $id_impianto, $tipo, $marca);
 
 // set parameters and execute	
 	$id_impianto = $_POST['id_impianto'];
@@ -72,15 +71,7 @@ if($selezione==='sensore'){
 	$stmt->execute();	
 	header('location:../DashboardAmministratore.php?selezione=sensore');	
 
-	/*	
-	if($connect->query($sql) === TRUE) {
-		echo '<p>New Record Successfully Created</p>';
-		echo "<p>'$id_impianto', '$tipo', '$marca'</p>";
-		//header('location:../indexSens.php');	
-		header('location:../DashboardAmministratore.php?selezione=sensore');	
-	} else {
-		echo 'Error ' . $sql . ' ' . $connect->connect_error;
-	}*/
+
 	$connect->close();
 }
 }
