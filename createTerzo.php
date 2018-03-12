@@ -20,7 +20,7 @@
 <?php
 	if(isset($_GET['nuovaMail'])===true){
 		require_once 'php_action/db_connect.php';
-		$novaMailTerzo=$_GET['emailTerzo'].",".$_GET['nuovaMail'];
+		$novaMailTerzo=$_GET['emailTerzo'].','.$_GET['nuovaMail'];
 	$connect->query("UPDATE utente SET emailTerzi='$novaMailTerzo' WHERE email='".$_GET['email']."';");  
 	$connect->close();
 	header('location:VediTerzi.php?email='.$_GET['email']);

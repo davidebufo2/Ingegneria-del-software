@@ -7,5 +7,3 @@ $dbname = 'ingsw';
 
 // create connection
 $connect = new mysqli($localhost, $username, $password, $dbname);
-
-?>
