@@ -52,10 +52,13 @@ HTML;
 						$s_tipo = htmlspecialchars( $obj->tipo );
 						$s_id = htmlspecialchars( $obj->id );
 						$s_marca = htmlspecialchars( $obj->marca );
-						echo 'Tipo:',$s_tipo,' ','ID:',$s_id,'','Marca:',$s_marca,getSintesiSensore();
+						$report = 'Tipo:'.$s_tipo.' ID:'.$s_id.' Marca:'.$s_marca;	
+						
+				$report.=getSintesiSensore($s_id);
+						printf ($report.'<hr>'  );
+						
 						/*printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
 								$obj->tipo, $obj->id, $obj->marca  );*/
-				/*		inserire storico sensore		*/
 			}
 			$str='</div></div> ';
 			$row2->close();	
@@ -197,9 +200,12 @@ function getStoricoSensore($sensore){
 		return($string);
 	}
 		
+	
+
+	
 	function getSintesiSensore($sensore){	
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-	  	 $myquery=$mysqliDB->query("SELECT valore FROM rilevazione WHERE id_sensore=$sensore;"); 
+	  	 $myquery=$mysqliDB->query('SELECT valore FROM rilevazione WHERE id_sensore='.$sensore.';'); 
 		 $media=0;
 		 $count=1;
 		 $eccezioni=0;
@@ -214,13 +220,10 @@ function getStoricoSensore($sensore){
 				}
 		  }
 		 $media/=$count;
-		// echo("Media:".$media);
-		// echo(" Eccezioni:".$eccezioni);
-		  
 			/* free row set */
 		 $myquery->close();	
 		 $mysqliDB->close();
-		 return("Media:".$media." Eccezioni:".$eccezioni);
+		 return('Media:'.$media.' Eccezioni:'.$eccezioni);
 	}
 
 	
