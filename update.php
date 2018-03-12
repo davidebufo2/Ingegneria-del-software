@@ -24,9 +24,16 @@ if($selezione==='utente'){
 			Amministratore = $Amministratore, emailTerzi = '$emailTerzi', password = '$password' 
 			WHERE email = '".$email."' ;";
 	if($connect->query($sql) === true) {
-		echo '<p>Succcessfully Updated</p>';
+		
+		$str = <<<HTML
+		<p>Succcessfully Updated</p>
+		<a href='../editUtente.php?email="$emailTo"'><button type='button'>Back</button></a>
+		<a href='../DashboardAmministratore.php?selezione=utente'><button type='button'>Home</button></a>
+HTML;
+		echo $str;
+		/*echo '<p>Succcessfully Updated</p>';
 		echo "<a href='../editUtente.php?email=",$emailTo,"'><button type='button'>Back</button></a>";
-		echo "<a href='../DashboardAmministratore.php?selezione=utente'><button type='button'>Home</button></a>";
+		echo "<a href='../DashboardAmministratore.php?selezione=utente'><button type='button'>Home</button></a>";*/
 	} else {
 		echo 'Erorr while updating record : ', $connect->error;
 	}
@@ -45,9 +52,15 @@ if($selezione==='impianto'){
 	$sql  = "UPDATE impianto SET nome = '$nome', locazione = '$locazione', emailProprietario = '$emailProprietario'
 			WHERE id_impianto = '".$id_impianto."' ;";
 	if($connect->query($sql) === true) {
-		echo '<p>Succcessfully Updated</p>';
+		$str = <<<HTML
+		<p>Succcessfully Updated</p> 
+		<a href='../editImp.php?id_impianto=",$id_impianto,"'><button type='button'>Indietro</button></a>
+		<a href='../DashboardAmministratore.php?selezione=impianto'><button type='button'>Home</button></a>
+HTML;
+		echo $str;
+		/*echo '<p>Succcessfully Updated</p>';
 		echo "<a href='../editImp.php?id_impianto=",$id_impianto,"'><button type='button'>Indietro</button></a>";
-		echo "<a href='../DashboardAmministratore.php?selezione=impianto'><button type='button'>Home</button></a>";
+		echo "<a href='../DashboardAmministratore.php?selezione=impianto'><button type='button'>Home</button></a>";*/
 	} else {
 		echo 'Erorr while updating record : ', $connect->error;
 	}
@@ -66,9 +79,15 @@ if($selezione==='sensore'){
 	$sql  = "UPDATE sensore SET id_impianto = '$id_impianto', marca = '$marca', tipo = '$tipo'
 			WHERE id = ".$id.' ;';
 	if($connect->query($sql) === true) {
-		echo '<p>Succcessfully Updated</p>';
+		$str = <<<HTML
+		<p>Succcessfully Updated</p> 
+		<a href='../editSens.php?id=",$id,"'><button type='button'>Back</button></a>
+		<a href='../DashboardAmministratore.php?selezione=sensore'><button type='button'>Home</button></a>
+HTML;
+		echo $str;
+		/*echo '<p>Succcessfully Updated</p>';
 		echo "<a href='../editSens.php?id=",$id,"'><button type='button'>Back</button></a>";
-		echo "<a href='../DashboardAmministratore.php?selezione=sensore'><button type='button'>Home</button></a>";
+		echo "<a href='../DashboardAmministratore.php?selezione=sensore'><button type='button'>Home</button></a>";*/
 	} else {
 		echo 'Erorr while updating record : ', $connect->error;
 	}

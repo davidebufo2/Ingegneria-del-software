@@ -49,8 +49,12 @@ HTML;
 			echo($str);
 			$row2= $connect->query('SELECT * FROM sensore WHERE id_impianto='.$id_impianto.';');
 			while ($obj = $row2->fetch_object()) {
-						printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
-								$obj->tipo, $obj->id, $obj->marca  );
+						$s_tipo = htmlspecialchars( $obj->tipo );
+						$s_id = htmlspecialchars( $obj->id );
+						$s_marca = htmlspecialchars( $obj->marca );
+						echo 'Tipo:',$s_tipo,' ','ID:',$s_id,'','Marca:',$s_marca,getSintesiSensore();
+						/*printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
+								$obj->tipo, $obj->id, $obj->marca  );*/
 				/*		inserire storico sensore		*/
 			}
 			$str='</div></div> ';
