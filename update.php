@@ -2,8 +2,7 @@
 <link href="../styleDash.css" rel="stylesheet" type="text/css"> 
 <?php 
 
-require_once 'db_connect.php';
-
+require_once 'db_connect.php'; 
 $selezione=$_POST['selezione'];
 if($selezione==='utente'){
 	if(isset($_POST) === true ) {
