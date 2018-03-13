@@ -18,10 +18,21 @@ if($selezione==='utente'){
 	$email = $_POST['email'];
 	$emailTo = $_POST['emailTo'];
 	$telefono = $_POST['telefono'];
+		
+		
 
-	$sql  = "UPDATE utente SET nome = '$nome', cognome = '$cognome', email = '$emailTo', telefono = '$telefono',
+
+$sql = sprintf(  "  UPDATE utente SET nome = '$nome', cognome = '$cognome', email = '$emailTo', telefono = '%s',
+			Amministratore = $Amministratore, emailTerzi = '$emailTerzi', password = '$password' 
+			WHERE email = '".$email."' ;   ",
+  mysqli_real_escape_string($connect, $telefono));
+		
+		
+
+/*	$sql  = "UPDATE utente SET nome = '$nome', cognome = '$cognome', email = '$emailTo', telefono = '$telefono',
 			Amministratore = $Amministratore, emailTerzi = '$emailTerzi', password = '$password' 
 			WHERE email = '".$email."' ;";
+*/
 	if($connect->query($sql) === true) {
 		
 		$str = <<<HTML
