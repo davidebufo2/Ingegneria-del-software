@@ -11,8 +11,10 @@
 
 <body>
 <?php
-	//$email = $_GET['email'];
-	$email = 'terry@gmail.com';
+	$email = $_GET['email'];
+	//$email = 'terry@gmail.com';
+	const NUM_MIN = 10;
+	const NUM_MAX = 19;
 	$result='';
 	$id_impianto='';
 	require_once 'php_action/db_connect.php';
@@ -55,7 +57,9 @@ HTML;
 						$report = 'Tipo:'.$s_tipo.' ID:'.$s_id.' Marca:'.$s_marca;	
 						
 				$report.=getSintesiSensore($s_id);
-						printf ($report.'<hr>'  );
+				$report.=getStoricoSensore($s_id);
+				
+				printf ($report.'<hr>'  );
 						
 						/*printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
 								$obj->tipo, $obj->id, $obj->marca  );*/
@@ -156,8 +160,8 @@ $mail_headers .= 'MIME-Version: 1.0\r\n';
 $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 
 	
-																	/* DECOMMENTARE PER INVIARE LE MAIL
-	
+																//	 DECOMMENTARE PER INVIARE LE MAIL
+// INIZIO INVIO EMAIL	
 	$sql = "SELECT * FROM utente WHERE email='".$email."';";
 	$result = $connect->query($sql);		
 	if($result->num_rows > 0) {
@@ -172,9 +176,9 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 			}	
 		}
 	}
+// FINE INVIO EMAIL
 	
 	
-	*/
 
 																		/*		DECOMMENTARE PER DEBUG		*/
 //mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
@@ -184,20 +188,18 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 	
 	
 function getStoricoSensore($sensore){
-		 
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-	  	 $myquery=$mysqliDB->query("SELECT valore,data FROM rilevazione WHERE id_sensore=$sensore;"); 
-		 $string="";
+	  	 $myquery=$mysqliDB->query('SELECT valore,data FROM rilevazione WHERE id_sensore='.$sensore.';'); 
+		 $string='';
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
-			  $string.="In data:".($obj->data)." Valore:".(floatval(substr($obj->valore,10,19)))."<br />";
+			  $string.='<br />In data:'.($obj->data).' Valore:'.(floatval(substr($obj->valore,NUM_MIN,NUM_MAX))).'<br />';
 			  
 		  }
-		 echo($string);
 		/* free row set */
 		 $myquery->close();	
 		 $mysqliDB->close();
-		return($string);
+		return $string;
 	}
 		
 	
@@ -223,7 +225,7 @@ function getStoricoSensore($sensore){
 			/* free row set */
 		 $myquery->close();	
 		 $mysqliDB->close();
-		 return('Media:'.$media.' Eccezioni:'.$eccezioni);
+		 return 'Media:'.$media.' Eccezioni:'.$eccezioni.' ';
 	}
 
 	

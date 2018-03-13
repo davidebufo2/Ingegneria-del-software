@@ -58,8 +58,8 @@
 			<tr>
 				<th>Password</th>
 				<td><input type="text" name="password" placeholder="password" value="<?php 
-					define('NUM_MIN_PASS',    0);
-					define('NUM_MAX_PASS',    8);
+					const NUM_MIN_PASS = 0;//define('NUM_MIN_PASS',    0);
+					const NUM_MAX_PASS = 8;//define('NUM_MAX_PASS',    8);
 					$caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 					$stringaRandom = '';
 					for ($i = NUM_MIN_PASS; $i < NUM_MAX_PASS; $i++) {
