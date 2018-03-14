@@ -1,18 +1,26 @@
 <?php
 session_start();
-/*-- CONNESSIONE MYSQL host, utente, password, nomeDB ---*/
+include('nocsrf.php');
+
+ $csrf = new nocsrf;
+
+  if (isset($_POST['email'])) {
+    if($csrf->check('csrf_token', $_POST, false, 60*19, true)) { // FIXED
+      // ... sensitive PHP code follows here ...
+			/*-- CONNESSIONE MYSQL host, utente, password, nomeDB ---*/
 	$mysqli = new mysqli('localhost', 'root', '', 'ingsw');
 	
 /* ----- Convalida Login ------- */
 	$email = $_POST['email'];
-	$password = $_POST['pswd'];
+	$_SESSION['email'] = $_POST['email'];
+	$passw = htmlspecialchars($_POST['pswd']) ;
 	
   	$richiesta = sprintf("SELECT * FROM utente WHERE email = '%s' AND password = '%s' " ,
-  	mysqli_real_escape_string($mysqli, $email),
-  	mysqli_real_escape_string($mysqli, $password));
+  	//mysqli_real_escape_string($mysqli, $email),
+  	mysqli_real_escape_string($mysqli, $_SESSION['email']),
+  	mysqli_real_escape_string($mysqli, $passw));
 
 	$query = $mysqli->query($richiesta);
-	//$query = $mysqli->query("SELECT * FROM utente WHERE email = '$email' AND password = '$password' "  );
 	if($query->num_rows>0)
 	{
     	$data = $query->fetch_assoc();
@@ -28,5 +36,13 @@ session_start();
 	else{
 		header('Location: Login.php');
 	}
+    } else {
+      // log potential CSRF attack...
+      echo '<pre>Your request cannot be completed...</pre>';
+    }
+  }
 
-	
+
+
+// Generate CSRF token to use in form hidden field
+$token = NoCSRF::generate( 'csrf_token' );

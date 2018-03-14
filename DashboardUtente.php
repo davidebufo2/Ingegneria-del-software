@@ -57,11 +57,14 @@ HTML;
 						$s_tipo = htmlspecialchars( $obj->tipo );
 						$s_id = htmlspecialchars( $obj->id );
 						$s_marca = htmlspecialchars( $obj->marca );
-						$report = 'Tipo:'.$s_tipo.' ID:'.$s_id.' Marca:'.$s_marca;	
-						
-				$report.=getSintesiSensore($s_id);
+						$report = 'Tipo:'.$s_tipo.' ID:'.$s_id.' Marca:'.$s_marca.' ';	
+				printf ($report);		
+				//$report.=getSintesiSensore($s_id);
 				//$report.=getStoricoSensore($s_id);
-				printf ($report);
+				printSintesiSensore($s_id);
+				printStoricoSensore($s_id);
+				
+				//printf ($report);
 				echo <<<HTML
 				<hr>
 HTML;
@@ -71,16 +74,20 @@ HTML;
 HTML;
 			$row2->close();	
 		}
-		/*$str='<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>';
-		echo($str);*/
 		echo <<<HTML
 		<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>
 HTML;
 			
-		$str='<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
+				echo <<<HTML
+		<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
+		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email=$email"><button type="button" id="terziBtn">Terzi</button></a></footer>
+HTML;
+		
+	/*	$str='<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
 		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email='.$email.'"><button type="button" id="terziBtn">Terzi</button></a></footer>
 		';
 		echo($str);
+	*/
 		
 	}
 	?>
@@ -226,7 +233,7 @@ function getStoricoSensore($sensore){
 			  $string=substr($obj->valore, 10, 19);
 			  $media+=floatval($string);
 			  $count++;
-			  if (preg_match("/[^0-9]/", $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
+			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
 					//echo "eccezzione nel valore:$string<br \>";
 				  	$eccezioni++;
 				}
@@ -236,6 +243,55 @@ function getStoricoSensore($sensore){
 		 $myquery->close();	
 		 $mysqliDB->close();
 		 return 'Media:'.$media.' Eccezioni:'.$eccezioni.' ';
+	}
+
+function printStoricoSensore($sensore){
+		$mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
+		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
+		mysqli_real_escape_string($mysqliDB, $sensore)); 
+		$myquery=$mysqliDB->query($myq);
+		 $string='';
+		/*fetch object array */
+		  while ($obj = $myquery->fetch_object()) { 
+			  $data=$obj->data;
+			  $val=floatval(substr($obj->valore,NUM_MIN,NUM_MAX));
+		  echo <<<HTML
+					<br />In data:$data Valore:$val<br />
+HTML;
+		  }
+		 $myquery->close();	
+		 $mysqliDB->close();
+		return $string;
+	}
+		
+	
+
+	
+function printSintesiSensore($sensore){	
+		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
+	  	 //$myquery=$mysqliDB->query('SELECT valore FROM rilevazione WHERE id_sensore='.$sensore.';'); 
+		 $myq = sprintf( "SELECT valore FROM rilevazione WHERE id_sensore='%s';", 
+		 mysqli_real_escape_string($mysqliDB, $sensore)); 
+		 $myquery=$mysqliDB->query($myq);
+		 $media=0;
+		 $count=1;
+		 $eccezioni=0;
+		/*fetch object array */
+		  while ($obj = $myquery->fetch_object()) { 
+			  $string=substr($obj->valore, 10, 19);
+			  $media+=floatval($string);
+			  $count++;
+			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
+					//echo "eccezzione nel valore:$string<br \>";
+				  	$eccezioni++;
+				}
+		  }
+		 $media/=$count;
+			/* free row set */
+		 $myquery->close();	
+		 $mysqliDB->close();
+		echo 'Media:',$media,' Eccezioni:',$eccezioni,' ' ;
+		 return '';
 	}
 
 	

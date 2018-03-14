@@ -2,6 +2,7 @@
 if(isset($_SESSION)===true){
 	session_destroy();
 }
+include('nocsrf.php');
 ?>
 <!doctype html>
 <html>
@@ -37,6 +38,9 @@ if(isset($_SESSION)===true){
 		  <input type="password" class="form-control" id="pswd" placeholder="Enter password" name="pswd" required>
 		</div>
 		<div class="col-xs-2" style="padding-top: 25px">
+		
+		 <input type="hidden" name="csrf_token" value="<?php echo NoCSRF::generate( 'csrf_token' ); ?>">
+		 
 		  <button type="submit" class="btn btn-primary" name="submit">Login</button>
 	    </div>
 	  </form>
