@@ -1,4 +1,7 @@
-﻿<!doctype html>
+﻿<?php 
+session_start();
+?>
+<!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -11,7 +14,7 @@
 
 <body>
 <?php
-	$email = $_GET['email'];
+	$email = $_SESSION['email'];
 	//$email = 'terry@gmail.com';
 	const NUM_MIN = 10;
 	const NUM_MAX = 19;
@@ -57,22 +60,23 @@ HTML;
 						$report = 'Tipo:'.$s_tipo.' ID:'.$s_id.' Marca:'.$s_marca;	
 						
 				$report.=getSintesiSensore($s_id);
-				$report.=getStoricoSensore($s_id);
+				//$report.=getStoricoSensore($s_id);
 				printf ($report);
 				echo <<<HTML
 				<hr>
 HTML;
-						
-						/*printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
-								$obj->tipo, $obj->id, $obj->marca  );*/
 			}
-			$str='</div></div> ';
+			echo <<<HTML
+				</div></div>
+HTML;
 			$row2->close();	
-			echo($str);
 		}
-		$str='<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>';
-		echo($str);
-					
+		/*$str='<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>';
+		echo($str);*/
+		echo <<<HTML
+		<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>
+HTML;
+			
 		$str='<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
 		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email='.$email.'"><button type="button" id="terziBtn">Terzi</button></a></footer>
 		';

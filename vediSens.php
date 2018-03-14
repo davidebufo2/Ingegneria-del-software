@@ -25,17 +25,21 @@
 			$result = $connect->query($sql);
 
 			if($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					
-					echo"<tr id='cell'>
-						<td>ID:",htmlspecialchars($row['id']),'</td>
-						<td>',htmlspecialchars($row['marca']),'</td>
-						<td>',htmlspecialchars($row['tipo']),"</td>
+				while($row = $result->fetch_assoc()) {		
+					$id=htmlspecialchars($row['id']);	
+					$marca=htmlspecialchars($row['marca']);	
+					$tipo=htmlspecialchars($row['tipo']);
+					echo <<<HTML
+					<tr id='cell'>
+						<td>ID:$id</td>
+						<td>$marca</td>
+						<td>$tipo</td>
 						<td>
-							<a href='editSens.php?id=",htmlspecialchars($row['id']),"'><button type='button' id='button_mod'>Modifica</button></a>
-							<a href='removeSens.php?id=",htmlspecialchars($row['id']),"'><button type='button' id='button_del'>Elimina</button></a>
+							<a href='editSens.php?id=$id'><button type='button' id='button_mod'>Modifica</button></a>
+							<a href='removeSens.php?id=$id'><button type='button' id='button_del'>Elimina</button></a>
 						</td>
-					</tr>";
+					</tr>
+HTML;
 				}
 			} else {
 				$str= "<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";

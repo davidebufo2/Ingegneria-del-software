@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!doctype html>
 <html>
 <head>
@@ -25,19 +28,9 @@
 	$str.=','.$_GET['nuovaMail'];
 	$connect->query("UPDATE utente SET emailTerzi='$str' WHERE email='".$_GET['email']."';");  
 	$connect->close();
-		
-	$host  = rawurlencode($_SERVER['HTTP_HOST']); // Neutralized, CR/LF are encoded
-    $extra = 'www/VediTerzi.php?email='.htmlspecialchars($_GET['email']);
-		
-			function check($x){
-	return $x ;
-}
-	$strDest = "http://$host/$extra";
-	$strDest = check($strDest);
-	header('Location:'.$strDest);
 	
-    header("Location: http://$host/$extra");
-	//header('location:VediTerzi.php?email='.$_GET['email']);
+	$_SESSION['email'] = htmlspecialchars($_GET['email']);
+	header('Location:VediTerzi.php');
 	}
 	
 	

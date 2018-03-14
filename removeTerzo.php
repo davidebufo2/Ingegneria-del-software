@@ -1,13 +1,5 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Documento senza titolo</title>
-</head>
-
-<body>
-
 <?php 
+	session_start();
 	require_once 'php_action/db_connect.php';
 	$str='';
 	$sql = "SELECT * FROM utente WHERE email='".$_GET['email']."';";
@@ -23,20 +15,8 @@
 	
 	$connect->query("UPDATE utente SET emailTerzi='$str' WHERE email='".$_GET['email']."';");  
 	$connect->close();
-	
-	$host  = rawurlencode($_SERVER['HTTP_HOST']); // Neutralized, CR/LF are encoded
-    $extra = 'www/VediTerzi.php?email='.htmlspecialchars($_GET['email']);
-	
-	function check($x){
-	return $x ;
-}
-	$strDest = "http://$host/$extra";
-	$strDest = check($strDest);
-	header('Location:'.$strDest);
-	
-   // header("Location: http://$host/$extra");
-	//header('location:VediTerzi.php?email='.$_GET['email']);
-	?>
 
-</body>
-</html>
+	$_SESSION['email'] = htmlspecialchars($_GET['email']);
+	header('Location:VediTerzi.php');
+
+	//header('location:VediTerzi.php?email='.$_GET['email']);
