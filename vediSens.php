@@ -28,12 +28,12 @@
 				while($row = $result->fetch_assoc()) {
 					
 					echo"<tr id='cell'>
-						<td>ID:",$row['id'],'</td>
-						<td>',$row['marca'],'</td>
-						<td>',$row['tipo'],"</td>
+						<td>ID:",htmlspecialchars($row['id']),'</td>
+						<td>',htmlspecialchars($row['marca']),'</td>
+						<td>',htmlspecialchars($row['tipo']),"</td>
 						<td>
-							<a href='editSens.php?id=",$row['id'],"'><button type='button' id='button_mod'>Modifica</button></a>
-							<a href='removeSens.php?id=",$row['id'],"'><button type='button' id='button_del'>Elimina</button></a>
+							<a href='editSens.php?id=",htmlspecialchars($row['id']),"'><button type='button' id='button_mod'>Modifica</button></a>
+							<a href='removeSens.php?id=",htmlspecialchars($row['id']),"'><button type='button' id='button_del'>Elimina</button></a>
 						</td>
 					</tr>";
 				}

@@ -31,8 +31,8 @@
 <fieldset>
 	<legend>Aggiungi utente</legend>
 	<form action="createTerzo.php" method="get">
-	<input type="hidden" name="email" value="<?php echo $_GET['email'];?>" />
-	<input type="hidden" name="emailTerzo" value="<?php echo $_GET['emailTerzo'];?>" />
+	<input type="hidden" name="email" value="<?php echo htmlspecialchars($_GET['email']);?>" />
+	<input type="hidden" name="emailTerzo" value="<?php echo htmlspecialchars($_GET['emailTerzo']);?>" />
 		<table cellspacing="0" cellpadding="0">
 			<tr>
 				<th>Email Terzo</th>
