@@ -11,8 +11,8 @@
 
 <body>
 <?php
-	$email = $_GET['email'];
-	//$email = 'terry@gmail.com';
+	//$email = $_GET['email'];
+	$email = 'terry@gmail.com';
 	const NUM_MIN = 10;
 	const NUM_MAX = 19;
 	$result='';
@@ -59,7 +59,7 @@ HTML;
 				$report.=getSintesiSensore($s_id);
 				$report.=getStoricoSensore($s_id);
 				
-				printf ( htmlspecialchars($report.'<hr>')  );
+				printf ($report.'<hr>' );
 						
 						/*printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
 								$obj->tipo, $obj->id, $obj->marca  );*/
@@ -74,7 +74,7 @@ HTML;
 		$str='<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
 		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email='.$email.'"><button type="button" id="terziBtn">Terzi</button></a></footer>
 		';
-		echo(htmlspecialchars($str));
+		echo($str);
 		
 	}
 	?>
@@ -162,7 +162,7 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 	
 																//	 DECOMMENTARE PER INVIARE LE MAIL
 // INIZIO INVIO EMAIL	
-	$sql = "SELECT * FROM utente WHERE email='".$email."';";
+/*	$sql = "SELECT * FROM utente WHERE email='".$email."';";
 	$result = $connect->query($sql);		
 	if($result->num_rows > 0) {
 		$result = $connect->query($sql);
@@ -175,7 +175,7 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 				mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers);
 			}	
 		}
-	}
+	}*/
 // FINE INVIO EMAIL
 	
 	
@@ -189,10 +189,7 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 	
 function getStoricoSensore($sensore){
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-  $myquery = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';",
-  mysqli_real_escape_string($mysqliDB, $sensore)
-);
-	  	 //$myquery=$mysqliDB->query('SELECT valore,data FROM rilevazione WHERE id_sensore='.$sensore.';'); 
+	  	 $myquery=$mysqliDB->query('SELECT valore,data FROM rilevazione WHERE id_sensore='.$sensore.';'); 
 		 $string='';
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
