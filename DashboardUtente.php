@@ -11,8 +11,8 @@
 
 <body>
 <?php
-	//$email = $_GET['email'];
-	$email = 'terry@gmail.com';
+	$email = $_GET['email'];
+	//$email = 'terry@gmail.com';
 	const NUM_MIN = 10;
 	const NUM_MAX = 19;
 	$result='';
@@ -58,8 +58,10 @@ HTML;
 						
 				$report.=getSintesiSensore($s_id);
 				$report.=getStoricoSensore($s_id);
-				
-				printf ($report.'<hr>' );
+				printf ($report);
+				echo <<<HTML
+				<hr>
+HTML;
 						
 						/*printf ('Tipo:%s  Valore:%s  Marca:%s '.getSintesiSensore($obj->id).'<hr>' ,
 								$obj->tipo, $obj->id, $obj->marca  );*/
@@ -189,7 +191,11 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 	
 function getStoricoSensore($sensore){
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-	  	 $myquery=$mysqliDB->query('SELECT valore,data FROM rilevazione WHERE id_sensore='.$sensore.';'); 
+	 // 	 $myquery=$mysqliDB->query('SELECT valore,data FROM rilevazione WHERE id_sensore='.$sensore.';'); 
+	
+		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
+		mysqli_real_escape_string($mysqliDB, $sensore)
+); $myquery=$mysqliDB->query($myq);
 		 $string='';
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 

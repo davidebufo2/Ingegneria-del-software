@@ -16,14 +16,18 @@
 				$row = $result->fetch_assoc() ;
 				$str=$row['emailTerzi'];
 			}
-	$emailTerzo=$_GET['emailTerzo'];
+	$emailTerzo=htmlspecialchars($_GET['emailTerzo']);
 	$str=str_replace(',$emailTerzo','',$str);	//3 casi virgola pre-post-non
 	$str=str_replace('$emailTerzo,','',$str);
 	$str=str_replace($emailTerzo,'',$str);
 	
 	$connect->query("UPDATE utente SET emailTerzi='$str' WHERE email='".$_GET['email']."';");  
 	$connect->close();
-	header('location:VediTerzi.php?email='.$_GET['email']);
+	
+	$host  = rawurlencode($_SERVER['HTTP_HOST']); // Neutralized, CR/LF are encoded
+    $extra = 'www/VediTerzi.php?email='.htmlspecialchars($_GET['email']);
+    header("Location: http://$host/$extra");
+	//header('location:VediTerzi.php?email='.$_GET['email']);
 	?>
 
 </body>
