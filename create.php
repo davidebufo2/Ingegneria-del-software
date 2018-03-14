@@ -18,13 +18,23 @@ if($selezione==='utente'){
 	$emailTerzi = $_POST['emailTerzi'];
 	$password = $_POST['password'];
 
-	$sql = "INSERT INTO utente (nome, cognome, telefono, email, Amministratore, emailTerzi, password) VALUES ('$nome', '$cognome', '$telefono', '$email', '$Amministratore', '$emailTerzi', '$password')";
-		
+	//$sql = "INSERT INTO utente (nome, cognome, telefono, email, Amministratore, emailTerzi, password) VALUES ('$nome', '$cognome', '$telefono', '$email', '$Amministratore', '$emailTerzi', '$password')";
+	$sql = sprintf(
+  "INSERT INTO utente (nome, cognome, telefono, email, Amministratore, emailTerzi, password) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+  mysqli_real_escape_string($connect, $nome),
+  mysqli_real_escape_string($connect, $cognome),
+  mysqli_real_escape_string($connect, $telefono),
+  mysqli_real_escape_string($connect, $email),
+  mysqli_real_escape_string($connect, $Amministratore),
+  mysqli_real_escape_string($connect, $emailTerzi),
+  mysqli_real_escape_string($connect, $password)
+);	
 	if($connect->query($sql) === true) {
 		//header('location:../indexUtente.php');	
 		header('location:../DashboardAmministratore.php?selezione=utente');	
 	} else {
-		echo 'Error ' , $sql , ' ' , $connect->connect_error;
+		echo htmlspecialchars('Error '.$sql.' '.$connect->connect_error);
+//echo 'Error ' , $sql , ' ' , $connect->connect_error;
 	}
 	$connect->close();
 	}
@@ -46,7 +56,7 @@ if($selezione==='impianto'){
 	if($connect->query($sql) === true) {
 		header('location:../DashboardAmministratore.php?selezione=impianto');	
 	} else {
-		echo 'Error ' , $sql , ' ' , $connect->connect_error;
+		echo htmlspecialchars('Error '.$sql.' '.$connect->connect_error);
 	}
 	$connect->close();
 }
