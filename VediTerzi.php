@@ -1,6 +1,4 @@
 <!doctype html>
-<?php require_once 'php_action/db_connect.php'; ?>
-
 <!DOCTYPE html>
 <html>
 <link href="styleDash.css" rel="stylesheet" type="text/css">
@@ -19,6 +17,7 @@
 		</thead>
 		<tbody>
 			<?php
+			require_once 'php_action/db_connect.php';
 			$email=htmlspecialchars($_GET['email']);
 			$sql = "SELECT * FROM utente WHERE email='".$email."';";
 			$result = $connect->query($sql);
@@ -53,7 +52,8 @@ HTML;
 			}
 		?>
 		</tbody>
-		<a href="<?php echo "createTerzo.php?emailTerzo=",$row['emailTerzi'],'&email=',$email ?>"><button type="button">Aggiungi terzo</button></a>
+		<a href="<?php $row['emailTerzi']=$row['emailTerzi']; $email=$email; //Serve solo a kiuwan
+				 echo 'createTerzo.php?emailTerzo=',$row['emailTerzi'],'&email=',$email ?>"><button type="button">Aggiungi terzo</button></a>
 	</table>
 </div>
 			

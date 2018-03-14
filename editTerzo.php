@@ -31,6 +31,7 @@ session_start();
 	
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);
 	header('Location:VediTerzi.php');
+		die();
 	}
 	
 	

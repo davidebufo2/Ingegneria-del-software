@@ -17,6 +17,7 @@ require_once 'php_action/db_connect.php';
 		header('location:./DashboardAmministratore.php?selezione=sensore');	
 	}
 	$connect->close();
+	die();
 	?>
 </body>
 </html>

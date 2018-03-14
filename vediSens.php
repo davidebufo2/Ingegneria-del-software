@@ -22,6 +22,7 @@
 		<tbody>
 			<?php
 			$sql = 'SELECT * FROM sensore WHERE id_impianto='.$_GET['id_impianto'].';';
+			$connect=$connect;//KIUWAN
 			$result = $connect->query($sql);
 
 			if($result->num_rows > 0) {

@@ -18,5 +18,6 @@
 
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);
 	header('Location:VediTerzi.php');
+die();
 
 	//header('location:VediTerzi.php?email='.$_GET['email']);

@@ -16,8 +16,8 @@ session_start();
 <?php
 	$email = $_SESSION['email'];
 	//$email = 'terry@gmail.com';
-	const NUM_MIN = 10;
-	const NUM_MAX = 19;
+	$num_min = 10;
+	$num_max = 19;
 	$result='';
 	$id_impianto='';
 	require_once 'php_action/db_connect.php';
@@ -77,10 +77,10 @@ HTML;
 		echo <<<HTML
 		<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>
 HTML;
-			
-				echo <<<HTML
+		$emailHTML=htmlspecialchars($email);	
+		echo <<<HTML
 		<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
-		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email=$email"><button type="button" id="terziBtn">Terzi</button></a></footer>
+		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email=$emailHTML"><button type="button" id="terziBtn">Terzi</button></a></footer>
 HTML;
 		
 	/*	$str='<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
@@ -203,14 +203,15 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 function getStoricoSensore($sensore){
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
 	 // 	 $myquery=$mysqliDB->query('SELECT valore,data FROM rilevazione WHERE id_sensore='.$sensore.';'); 
-	
+	$num_min = 10;
+	$num_max = $num_min+9;
 		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
 		mysqli_real_escape_string($mysqliDB, $sensore)
 ); $myquery=$mysqliDB->query($myq);
 		 $string='';
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
-			  $string.='<br />In data:'.($obj->data).' Valore:'.(floatval(substr($obj->valore,NUM_MIN,NUM_MAX))).'<br />';
+			  $string.='<br />In data:'.($obj->data).' Valore:'.(floatval(substr($obj->valore,$num_min,$num_max))).'<br />';
 			  
 		  }
 		/* free row set */
@@ -227,10 +228,11 @@ function getStoricoSensore($sensore){
 	  	 $myquery=$mysqliDB->query('SELECT valore FROM rilevazione WHERE id_sensore='.$sensore.';'); 
 		 $media=0;
 		 $count=1;
-		 $eccezioni=0;
+		 $eccezioni=0;	$num_min = 10;
+	$num_max = $num_min+9;
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, 10, 19);
+			  $string=substr($obj->valore, $num_min, $num_max);
 			  $media+=floatval($string);
 			  $count++;
 			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
@@ -250,18 +252,19 @@ function printStoricoSensore($sensore){
 		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
 		mysqli_real_escape_string($mysqliDB, $sensore)); 
 		$myquery=$mysqliDB->query($myq);
-		 $string='';
+		 $string='';	$num_min = 10;
+	$num_max = $num_min+9;
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
-			  $data=$obj->data;
-			  $val=floatval(substr($obj->valore,NUM_MIN,NUM_MAX));
+			  $data=htmlspecialchars($obj->data);
+			  $val=htmlspecialchars(floatval(substr($obj->valore,$num_min,$num_max)));
 		  echo <<<HTML
 					<br />In data:$data Valore:$val<br />
 HTML;
 		  }
 		 $myquery->close();	
 		 $mysqliDB->close();
-		return $string;
+		//return $string;
 	}
 		
 	
@@ -275,10 +278,11 @@ function printSintesiSensore($sensore){
 		 $myquery=$mysqliDB->query($myq);
 		 $media=0;
 		 $count=1;
-		 $eccezioni=0;
+		 $eccezioni=0;	$num_min = 10;
+	$num_max = $num_min+9;
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, 10, 19);
+			  $string=substr($obj->valore, $num_min, $num_max);
 			  $media+=floatval($string);
 			  $count++;
 			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
@@ -291,7 +295,7 @@ function printSintesiSensore($sensore){
 		 $myquery->close();	
 		 $mysqliDB->close();
 		echo 'Media:',$media,' Eccezioni:',$eccezioni,' ' ;
-		 return '';
+		// return '';
 	}
 
 	

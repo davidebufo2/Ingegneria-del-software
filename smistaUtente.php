@@ -1,11 +1,11 @@
 <?php
 session_start();
-include('nocsrf.php');
+include 'nocsrf.php';
 
  $csrf = new nocsrf;
 
   if (isset($_POST['email'])) {
-    if($csrf->check('csrf_token', $_POST, false, 60*19, true)) { // FIXED
+    if($csrf->check('csrf_token', $_POST, false, 60*19, true)===true) { // FIXED
       // ... sensitive PHP code follows here ...
 			/*-- CONNESSIONE MYSQL host, utente, password, nomeDB ---*/
 	$mysqli = new mysqli('localhost', 'root', '', 'ingsw');
@@ -38,7 +38,7 @@ include('nocsrf.php');
 	}
     } else {
       // log potential CSRF attack...
-      echo '<pre>Your request cannot be completed...</pre>';
+      echo 'Your request cannot be completed...';
     }
   }
 
@@ -46,3 +46,4 @@ include('nocsrf.php');
 
 // Generate CSRF token to use in form hidden field
 $token = NoCSRF::generate( 'csrf_token' );
+die(); 

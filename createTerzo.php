@@ -47,6 +47,6 @@ session_start();
 		</table>
 	</form>
 </fieldset>
-
+<?php die(); ?>
 </body>
 </html>

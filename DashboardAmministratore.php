@@ -50,6 +50,9 @@
 		<tbody>
 			<?php
 			$sql = 'SELECT * FROM sensore ORDER BY id_impianto;';
+			
+			//KIUWAN
+			$connect=$connect; 
 			$result = $connect->query($sql);
 
 			if($result->num_rows > 0) {
@@ -106,6 +109,10 @@
 		</thead>
 		<tbody>
 			<?php
+			
+			//KIUWAN
+			$connect=$connect; 
+			
 			$sql = 'SELECT * FROM impianto ;';
 			$result = $connect->query($sql);
 
@@ -164,6 +171,10 @@
 		</thead>
 		<tbody>
 			<?php
+			
+			//KIUWAN
+			$connect=$connect; 
+			
 			$sql = 'SELECT * FROM utente ;';
 			$result = $connect->query($sql);
 
