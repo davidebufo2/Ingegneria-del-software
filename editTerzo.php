@@ -25,6 +25,11 @@ session_start();
 	$str=str_replace(',$emailTerzo','',$str);	//3 casi virgola pre-post-non
 	$str=str_replace('$emailTerzo,','',$str);
 	$str=str_replace($emailTerzo,'',$str);
+		//Correzzione errori
+	$str=str_replace(',,','',$str);
+	$str=str_replace(',,,','',$str);
+	$str=str_replace(',,,,','',$str);
+	$str=str_replace(',,,,,','',$str);
 	$str.=','.$_GET['nuovaMail'];
 	$connect->query("UPDATE utente SET emailTerzi='$str' WHERE email='".$_GET['email']."';");  
 	$connect->close();

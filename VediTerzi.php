@@ -1,4 +1,6 @@
-<!doctype html>
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <link href="styleDash.css" rel="stylesheet" type="text/css">
@@ -18,7 +20,10 @@
 		<tbody>
 			<?php
 			require_once 'php_action/db_connect.php';
-			$email=htmlspecialchars($_GET['email']);
+			$email=htmlspecialchars($_SESSION['email']);
+			if(isset($_GET['email'])===true){
+				$email=htmlspecialchars($_GET['email']);
+			}
 			$sql = "SELECT * FROM utente WHERE email='".$email."';";
 			$result = $connect->query($sql);
 			if($result->num_rows > 0){
@@ -37,14 +42,6 @@
 HTML;
  
    echo $str;
-		/*			echo  "<tr id='cell'>
-						<td>",htmlspecialchars($terzo),"</td>
-						<td>
-							<a href='removeTerzo.php?emailTerzo=",htmlspecialchars($terzo),'&email=',htmlspecialchars($email),"'><button type='button' id='button_del'>Elimina</button></a>
-							<a href='editTerzo.php?emailTerzo=",htmlspecialchars($terzo),'&email=',htmlspecialchars($email),"'><button type='button' id='button_mod'>Modifica</button></a>
-						</td>
-					</tr>";
-			*/		
 				}
 			} else {
 				$str="<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";

@@ -77,7 +77,7 @@ HTML;
 		echo <<<HTML
 		<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>
 HTML;
-		$emailHTML=htmlspecialchars($email);	
+		$emailHTML=$email;	
 		echo <<<HTML
 		<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
 		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email=$emailHTML"><button type="button" id="terziBtn">Terzi</button></a></footer>
