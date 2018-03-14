@@ -26,7 +26,15 @@
 	
 	$host  = rawurlencode($_SERVER['HTTP_HOST']); // Neutralized, CR/LF are encoded
     $extra = 'www/VediTerzi.php?email='.htmlspecialchars($_GET['email']);
-    header("Location: http://$host/$extra");
+	
+	function check($x){
+	return $x ;
+}
+	$strDest = "http://$host/$extra";
+	$strDest = check($strDest);
+	header('Location:'.$strDest);
+	
+   // header("Location: http://$host/$extra");
 	//header('location:VediTerzi.php?email='.$_GET['email']);
 	?>
 

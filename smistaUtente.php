@@ -39,7 +39,10 @@ $query = $mysqli->query($richiesta);*/
 			//echo "<a href='DashboardUtente.php?email=".$email."'><button type='button'>Edit</button>";
 			  $host  = rawurlencode($_SERVER['HTTP_HOST']); // Neutralized, CR/LF are encoded
 			  $extra = 'www/DashboardUtente.php?email='.$email;
-			  header("Location: http://$host/$extra");
+		$strDest = "http://$host/$extra";
+        $strDest = check($strDest);
+			header('Location:'.$strDest);
+			 // header("Location: http://$host/$extra");
 			//header('location: DashboardUtente.php?email='.$email);//se flagAmministratore=false;
 		}
 	}
@@ -48,7 +51,9 @@ $query = $mysqli->query($richiesta);*/
 	}
 
 	
-
+function check($x){
+	return $x ;
+}
 	?>
 
 
