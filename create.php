@@ -33,7 +33,7 @@ if($selezione==='utente'){
 		echo 'Error ' , $sql , ' ' , $connect->connect_error;
 	}
 	$connect->close();
-		die();
+		
 	}
 }
 
@@ -54,7 +54,9 @@ if($selezione==='impianto'){
 		echo 'Error ' , $sql , ' ' , $connect->connect_error;
 	}
 	$connect->close();
+	try{
 		die();
+	}	
 }
 }
 
