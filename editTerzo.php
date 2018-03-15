@@ -13,38 +13,22 @@ session_start();
 <?php 
 	if(isset($_GET['nuovaMail'])===true){
 	require_once 'php_action/db_connect.php';
-	$str='';
-	$sql = "SELECT * FROM utente WHERE email='".$_GET['email']."';";
-	$result = $connect->query($sql);
-	if($result->num_rows > 0){
-		$row = $result->fetch_assoc() ;
-		$str=$row['emailTerzi'];
-	}
-		
 	$emailTerzo=$_GET['emailTerzo'];
-	$str=str_replace(',$emailTerzo','',$str);	//3 casi virgola pre-post-non
-	$str=str_replace('$emailTerzo,','',$str);
-	$str=str_replace($emailTerzo,'',$str);
-		//Correzzione errori
-	$str=str_replace(',,','',$str);
-	$str=str_replace(',,,','',$str);
-	$str=str_replace(',,,,','',$str);
-	$str=str_replace(',,,,,','',$str);
-	$str.=','.$_GET['nuovaMail'];
-	$connect->query("UPDATE utente SET emailTerzi='$str' WHERE email='".$_GET['email']."';");  
+	$sql = sprintf( "UPDATE terzo SET emailTerzo=''%s'' WHERE emailProprietario=''%s'';", 
+mysqli_real_escape_string($connect, $emailTerzo),
+mysqli_real_escape_string($connect, htmlspecialchars($_GET['email'])));
+	$connect->query($sql);  
 	$connect->close();
 	
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);
 	header('Location:VediTerzi.php');
-		die();
+		die();	
 	}
-	
-	
-	?>
+?>
 	
 	
 <fieldset>
-	<legend>Aggiungi utente</legend>
+	<legend>Modifica terzo</legend>
 	<form action="editTerzo.php" method="get">
 	<input type="hidden" name="email" value="<?php echo htmlspecialchars($_GET['email']);?>" />
 	<input type="hidden" name="emailTerzo" value="<?php echo htmlspecialchars($_GET['emailTerzo']);?>" />

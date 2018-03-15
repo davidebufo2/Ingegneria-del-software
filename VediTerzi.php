@@ -24,7 +24,10 @@ session_start();
 			if(isset($_GET['email'])===true){
 				$email=htmlspecialchars($_GET['email']);
 			}
-			$sql = "SELECT * FROM utente WHERE email='".$email."';";
+			$sql = sprintf( "SELECT utente.*, terzo.* FROM utente INNER JOIN terzo ON utente.email = terzo.emailProprietario 
+			WHERE utente.email='%s';", 
+		mysqli_real_escape_string($connect, $email));
+	
 			$result = $connect->query($sql);
 			if($result->num_rows > 0){
 				$row = $result->fetch_assoc() ;
