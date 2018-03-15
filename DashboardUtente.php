@@ -16,10 +16,6 @@ session_start();
 <?php
 	$email = $_SESSION['email'];
 	//$email = 'terry@gmail.com';
-	$num_min = 9;
-	$num_min++;
-	$num_max = 18;
-	$num_max++;
 	$result='';
 	$id_impianto='';
 	require_once 'php_action/db_connect.php';
@@ -76,7 +72,7 @@ HTML;
 		echo <<<HTML
 		<div style=" position: absolute;   right: 0;  border-radius: 5px; border:double; border-color: hsla(0,0%,0%,0.6);   background-color: hsla(0,0%,100%,0.2)"></div> </div>
 HTML;
-		$emailHTML=$email;	
+		$emailHTML=htmlspecialchars( $email );	
 		echo <<<HTML
 		<footer style="position:fixed;top:25px;right:20px" id="footer"><a href="Login.php"><button type="button" id="logout">Logout</button></a></footer>
 		<footer style="position:fixed;top:45px;right:150px" id="footer"><a href="VediTerzi.php?email=$emailHTML"><button type="button" id="terziBtn">Terzi</button></a></footer>
@@ -192,14 +188,14 @@ function getStoricoSensore($sensore){
 
 		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
 		mysqli_real_escape_string($mysqliDB, $sensore)
-); $myquery=$mysqliDB->query($myq);
-		 $string='';		
-	$num_min = 9;
-	$num_min++;
-	$num_max = 18;
-	$num_max++;
+); 
+		$myquery=$mysqliDB->query($myq);
+		
+	$num_min = 10;
+	$num_max = 19;
 		/*fetch object array */
-		  while ($obj = $myquery->fetch_object()) { 
+		$string=''; echo $string;//echo solo per kiuwan		
+		 while ($obj = $myquery->fetch_object()) { 
 			  $string.='<br />In data:'.($obj->data).' Valore:'.(floatval(substr($obj->valore,$num_min,$num_max))).'<br />';
 			  
 		  }
@@ -217,13 +213,10 @@ function getStoricoSensore($sensore){
 		 $media=0;
 		 $count=1;
 		 $eccezioni=0;		
-	$num_min = 9;
-	$num_min++;
-	$num_max = 18;
-	$num_max++;
+	$num_min = 10;
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, $num_min, $num_max);
+			  $string=substr($obj->valore, $num_min, $num_min+10);
 			  $media+=floatval($string);
 			  $count++;
 			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
