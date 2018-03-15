@@ -17,7 +17,7 @@ if($selezione==='utente'){
 	$cognome = $_POST['cognome'];
 	$email = $_POST['email'];
 	$emailTo = $_POST['emailTo'];
-	$telefono = htmlspecialchars( $_POST['telefono'] );
+	$telefono = htmlspecialchars( $_POST['telefono'] ); $telefono=$telefono;
 		
 		
 
@@ -54,7 +54,7 @@ if($selezione==='impianto'){
 	$id_impianto = $_POST['id_impianto'];
 	$nome = $_POST['nome'];
 	$locazione = $_POST['locazione'];
-	$emailProprietario = $_POST['emailProprietario'];
+	$emailProprietario = $_POST['emailProprietario']; $emailProprietario = $emailProprietario ;
 	
 	/*$sql  = "UPDATE impianto SET nome = '$nome', locazione = '$locazione', emailProprietario = '$emailProprietario'
 			WHERE id_impianto = '".$id_impianto."' ;";
@@ -91,7 +91,7 @@ if($selezione==='sensore'){
 	$id = $_POST['id'];
 	$id_impianto = $_POST['id_impianto'];
 	$marca = $_POST['marca'];
-	$tipo = $_POST['tipo'];	
+	$tipo = $_POST['tipo'];	  	$tipo=$tipo;
 	//$sql  = "UPDATE sensore SET id_impianto = '$id_impianto', marca = '$marca', tipo = '$tipo'	WHERE id = ".$id.' ;';
 		
 	$sql = sprintf("UPDATE `sensore` SET `id_impianto` = '%s', `marca` = '%s', `tipo` = '%s'

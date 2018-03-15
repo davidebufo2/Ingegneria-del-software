@@ -60,7 +60,7 @@
 			<tr>
 				<th>Password</th>
 				<td><input type="text" name="password" placeholder="password" value="<?php 
-					/*
+					
 					const NUM_MIN_PASS = 0;//define('NUM_MIN_PASS',    0);
 					const NUM_MAX_PASS = 8;//define('NUM_MAX_PASS',    8);
 					$caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -69,16 +69,7 @@
 						$stringaRandom .= $caratteri[rand(0, strlen($caratteri) - 1)];
 					}
 					echo($stringaRandom);
-					*/
-					function randPass($min,$max){
-					$caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-					$stringaRandom = '';
-					for ($i = $min; $i < $max; $i++) {
-						$stringaRandom .= $caratteri[rand(0, strlen($caratteri) - 1)];
-					}
-					echo($stringaRandom);
-					}
-					randPass(0,8);
+					
 					?>" required /></td>
 			</tr>
 			<tr>
