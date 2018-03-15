@@ -41,7 +41,7 @@ include'nocsrf.php';
 		
 		
 		  <button type="submit" class="btn btn-primary" name="submit">Login</button> 
-		  <input type="hidden" name="csrf_token" value="<?php echo NoCSRF::generate( 'csrf_token' ); die();?>">
+		  <input type="hidden" name="csrf_token" value="<?php echo NoCSRF::generate( 'csrf_token' ); ?>">
 		 
 	    </div>
 	  </form>
