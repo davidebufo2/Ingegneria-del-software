@@ -16,7 +16,7 @@ require_once 'php_action/db_connect.php';
 	if($connect->query($sql) === true) {
 		header('location:./DashboardAmministratore.php?selezione=impianto');	
 	} 
-	$connect->close();
+	//$connect->close();
 	?>
 </body>
 </html>

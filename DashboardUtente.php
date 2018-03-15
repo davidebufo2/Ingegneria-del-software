@@ -130,6 +130,7 @@ $mail_corpo = '
 	
 												/*****       MODALITA' TABELLA            ******/	
 		$mail_corpo.='<table border="1" cellspacing="0" cellpadding="0"><thead><tr><th>Sensore</th><th>Marca</th><th>Tipo</th><th>Sintesi</th></tr></thead>	';
+		include 'sintesiSens.php';
 	if($result->num_rows > 0) {	
 		$result = $connect->query($sql);
 		while($row = $result->fetch_assoc()) {
@@ -137,7 +138,7 @@ $mail_corpo = '
 			$row2= $connect->query('SELECT * FROM sensore WHERE id_impianto='.$id_impianto.';');
 			$mail_corpo .= '<hr>Impianto:'.$id_impianto.'</hr>'.'<tbody>';
 			while ($obj = $row2->fetch_assoc()) {
-						$mail_corpo .= '<tr><td>'.$obj['id'].'</td><td>'.$obj['marca'].'</td><td>'.$obj['tipo'].'</td><td>'.getSintesiSensore($obj['id']).'</td><td>';				
+						$mail_corpo .= '<tr><td>'.$obj['id'].'</td><td>'.$obj['marca'].'</td><td>'.$obj['tipo'].'</td><td>'.getSS($obj['id']).'</td><td>';				
 			}
 			$mail_corpo .= '</tbody>';
 		}
@@ -181,7 +182,7 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 																		/*		DECOMMENTARE PER DEBUG		*/
 //mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
 	
-	
+	/*
 	
 function getStoricoSensore($sensore){
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
@@ -192,14 +193,12 @@ function getStoricoSensore($sensore){
 		$myquery=$mysqliDB->query($myq);
 		
 	$num_min = 10;
-	$num_max = 19;
-		/*fetch object array */
+	$num_max = $num_min+9;
 		$string=''; echo $string;//echo solo per kiuwan		
 		 while ($obj = $myquery->fetch_object()) { 
 			  $string.='<br />In data:'.($obj->data).' Valore:'.(floatval(substr($obj->valore,$num_min,$num_max))).'<br />';
 			  
 		  }
-		/* free row set */
 		 $myquery->close();	
 		 $mysqliDB->close();
 		return $string;
@@ -213,10 +212,10 @@ function getStoricoSensore($sensore){
 		 $media=0;
 		 $count=1;
 		 $eccezioni=0;		
-	$num_min = 10;
-		/*fetch object array */
+		 $num_min = $media;
+		/*fetch object array *
 		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, $num_min, $num_min+10);
+			  $string=substr($obj->valore, $num_min+10, $num_min+19);
 			  $media+=floatval($string);
 			  $count++;
 			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
@@ -225,13 +224,12 @@ function getStoricoSensore($sensore){
 				}
 		  }
 		 $media/=$count;
-			/* free row set */
 		 $myquery->close();	
 		 $mysqliDB->close();
 		 return 'Media:'.$media.' Eccezioni:'.$eccezioni.' ';
 	}
 	
-	
+*/
 	/*
 function printStoricoSensore($sensore){
 		$mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');

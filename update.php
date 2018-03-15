@@ -38,12 +38,13 @@ if($selezione==='utente'){
 */
 	$connect->query($richiesta) ;
 		
-		$str = <<<HTML
+		$emailToHTML=htmlspecialchars($emailTo);
+		echo <<<HTML
 		<p>Succcessfully Updated</p>
-		<a href='../editUtente.php?email="$emailTo"'><button type='button'>Back</button></a>
+		<a href='../editUtente.php?email="$emailToHTML"'><button type='button'>Back</button></a>
 		<a href='../DashboardAmministratore.php?selezione=utente'><button type='button'>Home</button></a>
 HTML;
-		echo $str;
+		
 		/*echo '<p>Succcessfully Updated</p>';
 		echo "<a href='../editUtente.php?email=",$emailTo,"'><button type='button'>Back</button></a>";
 		echo "<a href='../DashboardAmministratore.php?selezione=utente'><button type='button'>Home</button></a>";*/
@@ -60,15 +61,26 @@ if($selezione==='impianto'){
 	$locazione = $_POST['locazione'];
 	$emailProprietario = $_POST['emailProprietario'];
 	
-	$sql  = "UPDATE impianto SET nome = '$nome', locazione = '$locazione', emailProprietario = '$emailProprietario'
+	/*$sql  = "UPDATE impianto SET nome = '$nome', locazione = '$locazione', emailProprietario = '$emailProprietario'
 			WHERE id_impianto = '".$id_impianto."' ;";
+	*/	
+	
+  	$sql = sprintf("UPDATE impianto SET nome = '%s', locazione = '%s', emailProprietario = '%s'
+			WHERE id_impianto = '%s' ;" ,
+  	mysqli_real_escape_string($connect, $nome),
+  	mysqli_real_escape_string($connect, $locazione),
+  	mysqli_real_escape_string($connect, $emailProprietario),
+  	mysqli_real_escape_string($connect, $id_impianto));	
+		
+		
 	$connect->query($sql);
-		$str = <<<HTML
+		
+		$impiantoToHTML=htmlspecialchars($id_impianto);
+		echo <<<HTML
 		<p>Succcessfully Updated</p> 
-		<a href='../editImp.php?id_impianto=",$id_impianto,"'><button type='button'>Indietro</button></a>
+		<a href='../editImp.php?id_impianto=",$impiantoToHTML,"'><button type='button'>Indietro</button></a>
 		<a href='../DashboardAmministratore.php?selezione=impianto'><button type='button'>Home</button></a>
 HTML;
-		echo $str;
 		/*echo '<p>Succcessfully Updated</p>';
 		echo "<a href='../editImp.php?id_impianto=",$id_impianto,"'><button type='button'>Indietro</button></a>";
 		echo "<a href='../DashboardAmministratore.php?selezione=impianto'><button type='button'>Home</button></a>";*/
@@ -85,15 +97,24 @@ if($selezione==='sensore'){
 	$id_impianto = $_POST['id_impianto'];
 	$marca = $_POST['marca'];
 	$tipo = $_POST['tipo'];	
-	$sql  = "UPDATE sensore SET id_impianto = '$id_impianto', marca = '$marca', tipo = '$tipo'
-			WHERE id = ".$id.' ;';
+	//$sql  = "UPDATE sensore SET id_impianto = '$id_impianto', marca = '$marca', tipo = '$tipo'	WHERE id = ".$id.' ;';
+		
+	$sql = sprintf("UPDATE sensore SET id_impianto = '%s', marca = '%s', tipo = '%s'
+			WHERE id = '%s' ;" ,
+  	mysqli_real_escape_string($connect, $id_impianto),
+  	mysqli_real_escape_string($connect, $marca),
+  	mysqli_real_escape_string($connect, $tipo),
+  	mysqli_real_escape_string($connect, $id));		
+		
+		
 	$connect->query($sql);
-		$str = <<<HTML
+		
+		$idHTML=htmlspecialchars($id);
+		echo <<<HTML
 		<p>Succcessfully Updated</p> 
-		<a href='../editSens.php?id=",$id,"'><button type='button'>Back</button></a>
+		<a href='../editSens.php?id=",$idHTML,"'><button type='button'>Back</button></a>
 		<a href='../DashboardAmministratore.php?selezione=sensore'><button type='button'>Home</button></a>
 HTML;
-		echo $str;
 		/*echo '<p>Succcessfully Updated</p>';
 		echo "<a href='../editSens.php?id=",$id,"'><button type='button'>Back</button></a>";
 		echo "<a href='../DashboardAmministratore.php?selezione=sensore'><button type='button'>Home</button></a>";*/
