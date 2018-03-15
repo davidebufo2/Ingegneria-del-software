@@ -90,28 +90,44 @@ HTML;
        
       <?php
 // definisco mittente e destinatario della mail
-$nome_mittente = 'Mio Nome';
+$nome_mittente = 'MULTISEN';
 $mail_mittente = 'emaildiprovasmtp@gmail.com';
 $mail_destinatario = 'emaildiprovasmtp@gmail.com';
 // definisco il subject
-$mail_oggetto = 'Messaggio di prova';
+$mail_oggetto = 'Messaggio MultiSEN';
 // definisco il messaggio formattato in HTML
-$mail_corpo = '
+$mail_corpo = "
 <html>
 <head>
   <title>Documento di sintesi</title>
 </head>
-<body>';
-	$id_impianto='';
-	//require_once 'php_action/db_connect.php';
-	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
-	$result='';//kiuwan
-	if(isset($sql)===true)
-		{$result = $connect->query($sql);}
+<body>";
+	$id_impianto="";
+	require_once 'php_action/db_connect.php';
+	$sql = "SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;";
+	$result = $connect->query($sql);
 	
-	$mail_corpo = '<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>';
+	$mail_corpo = "<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>";
+
 	
-										/*****       MODALITA' TABELLA            ******/	
+												/*****       MODALITA' TESTO LIBERO            ******/	
+	
+	/*	if($result->num_rows > 0) {
+		$result = $connect->query($sql);
+		while($row = $result->fetch_assoc()) {
+			$id_impianto=$row['id_impianto'];
+			$mail_corpo .= "<p>Impianto:".$id_impianto."</p>";
+			$row2= $connect->query("SELECT * FROM sensore WHERE id_impianto=".$id_impianto.";");		
+			while ($obj = $row2->fetch_object()) {
+						$mail_corpo .= "Tipo:$obj->tipo  Marca:$obj->marca ".getSintesiSensore($obj->id)."<hr>" ;
+			}			
+		}
+	}
+*/												/*****       FINE-MODALITA' TESTO LIBERO            ******/	
+	
+	
+	
+								/*****       MODALITA' TABELLA            ******/	
 		$mail_corpo.='<table border="1" cellspacing="0" cellpadding="0"><thead><tr><th>Sensore</th><th>Marca</th><th>Tipo</th><th>Sintesi</th></tr></thead>	';
 		include 'sintesiSens.php';
 	if($result->num_rows > 0) {	
@@ -131,39 +147,42 @@ $mail_corpo.='</tbody>	</table>';
 		
 														/*****     FINE - MODALITA' TABELLA            ******/		
 		
-$mail_corpo.='</body></html>';
+
+$mail_corpo.="</body></html>";
+
 // aggiusto un po' le intestazioni della mail
 // E' in questa sezione che deve essere definito il mittente (From)
 // ed altri eventuali valori come Cc, Bcc, ReplyTo e X-Mailer
-$mail_headers = 'From: ' .  $nome_mittente . ' <' .  $mail_mittente . '>\r\n';
-$mail_headers .= 'Reply-To: ' .  $mail_mittente . '\r\n';
-$mail_headers .= 'X-Mailer: PHP/' . phpversion() . '\r\n';
+$mail_headers = "From: " .  $nome_mittente . " <" .  $mail_mittente . ">\r\n";
+$mail_headers .= "Reply-To: " .  $mail_mittente . "\r\n";
+$mail_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+
 // Aggiungo alle intestazioni della mail la definizione di MIME-Version,
 // Content-type e charset (necessarie per i contenuti in HTML)
-$mail_headers .= 'MIME-Version: 1.0\r\n';
-$mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
+$mail_headers .= "MIME-Version: 1.0\r\n";
+$mail_headers .= "Content-type: text/html; charset=iso-8859-1";
+
+
 	
 																//	 DECOMMENTARE PER INVIARE LE MAIL
 // INIZIO INVIO EMAIL	
-/*	$sql = "SELECT * FROM utente WHERE email='".$email."';";
+	/*
+	$sql = "SELECT * FROM terzo WHERE `emailProprietario`='".$email."';";
 	$result = $connect->query($sql);		
 	if($result->num_rows > 0) {
 		$result = $connect->query($sql);
 		while($row = $result->fetch_assoc()) {
-			$emailTerzi=$row['emailTerzi'];
-			
-			$terzo = explode(',',$emailTerzi);//Separa
-			foreach ($terzo as $mailToSend) {
-				$mail_destinatario = ltrim($mailToSend);
-				mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers);
-			}	
-		}
-	}*/
+			$terzo=$row['emailTerzo'];
+			$mail_destinatario = $terzo;
+			mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers);
+		}	
+	}
+	*/
 // FINE INVIO EMAIL
 	
 	
 																		/*		DECOMMENTARE PER DEBUG		*/
-//mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
+mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
 	
 	
 ?>
