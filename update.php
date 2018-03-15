@@ -17,11 +17,11 @@ if($selezione==='utente'){
 	$cognome = $_POST['cognome'];
 	$email = $_POST['email'];
 	$emailTo = $_POST['emailTo'];
-	$telefono = $_POST['telefono'];
+	$telefono = htmlspecialchars( $_POST['telefono'] );
 		
 		
 
-  	$richiesta = sprintf("UPDATE utente SET nome = '%s', cognome = '%s', email = '%s', telefono = '%s',	Amministratore = '%s', emailTerzi = '%s', password = '%s' WHERE email = '%s' ;" ,
+  	$richiesta = sprintf("UPDATE `utente` SET `nome` = '%s', `cognome` = '%s', `email` = '%s', `telefono` = '%s',	`Amministratore` = '%s', `emailTerzi` = '%s', `password` = '%s' WHERE `email` = '%s' ;" ,
   	mysqli_real_escape_string($connect, $nome),
   	mysqli_real_escape_string($connect, $cognome),
   	mysqli_real_escape_string($connect, $emailTo),
@@ -31,11 +31,6 @@ if($selezione==='utente'){
   	mysqli_real_escape_string($connect, $password),
   	mysqli_real_escape_string($connect, $email));
 
-/*
-	$sql  = "UPDATE utente SET nome = '$nome', cognome = '$cognome', email = '$emailTo', telefono = '$telefono',
-			Amministratore = $Amministratore, emailTerzi = '$emailTerzi', password = '$password' 
-			WHERE email = '".$email."' ;";
-*/
 	$connect->query($richiesta) ;
 		
 		$emailToHTML=htmlspecialchars($emailTo);
@@ -65,8 +60,8 @@ if($selezione==='impianto'){
 			WHERE id_impianto = '".$id_impianto."' ;";
 	*/	
 	
-  	$sql = sprintf("UPDATE impianto SET nome = '%s', locazione = '%s', emailProprietario = '%s'
-			WHERE id_impianto = '%s' ;" ,
+  	$sql = sprintf("UPDATE `impianto` SET `nome` = '%s', `locazione` = '%s', `emailProprietario` = '%s'
+			WHERE `id_impianto` = '%s' ;" ,
   	mysqli_real_escape_string($connect, $nome),
   	mysqli_real_escape_string($connect, $locazione),
   	mysqli_real_escape_string($connect, $emailProprietario),
@@ -99,8 +94,8 @@ if($selezione==='sensore'){
 	$tipo = $_POST['tipo'];	
 	//$sql  = "UPDATE sensore SET id_impianto = '$id_impianto', marca = '$marca', tipo = '$tipo'	WHERE id = ".$id.' ;';
 		
-	$sql = sprintf("UPDATE sensore SET id_impianto = '%s', marca = '%s', tipo = '%s'
-			WHERE id = '%s' ;" ,
+	$sql = sprintf("UPDATE `sensore` SET `id_impianto` = '%s', `marca` = '%s', `tipo` = '%s'
+			WHERE `id` = '%s' ;" ,
   	mysqli_real_escape_string($connect, $id_impianto),
   	mysqli_real_escape_string($connect, $marca),
   	mysqli_real_escape_string($connect, $tipo),

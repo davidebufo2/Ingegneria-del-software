@@ -26,7 +26,7 @@ if($selezione==='utente'){
 	$password = $_POST['password'];
 
 		
-	$sql = sprintf(  "INSERT INTO utente (nome, cognome, telefono, email, Amministratore, emailTerzi, password) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+	$sql = sprintf(  "INSERT INTO `utente` (`nome`, `cognome`, `telefono`, `email`, `Amministratore`, `emailTerzi`, `password`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
   	mysqli_real_escape_string($connect, $nome),
   	mysqli_real_escape_string($connect, $cognome),
   	mysqli_real_escape_string($connect, $telefono),
@@ -47,7 +47,7 @@ if($selezione==='impianto'){
 	$locazione = $_POST['locazione'];
 	$nome = $_POST['nome'];	
 
-	$sql = sprintf("INSERT INTO impianto ( emailProprietario, nome, locazione) VALUES ('%s', '%s', '%s')",
+	$sql = sprintf("INSERT INTO `impianto` ( `emailProprietario`, `nome`, `locazione`) VALUES ('%s', '%s', '%s')",
     $connect->real_escape_string($emailProprietario),
     $connect->real_escape_string($nome),    
     $connect->real_escape_string($locazione));
@@ -67,7 +67,7 @@ if($selezione==='sensore'){
 	
 	//$sql = "INSERT INTO sensore ( id_impianto, tipo, marca) VALUES ('$id_impianto', '$tipo', '$marca');";
 	// prepare and bind
-	$stmt = $connect->prepare('INSERT INTO sensore ( id_impianto, tipo, marca) VALUES (?, ?, ?)');
+	$stmt = $connect->prepare('INSERT INTO `sensore` ( `id_impianto`, `tipo`, `marca`) VALUES (?, ?, ?)');
 	$stmt->bind_param('iss', $id_impianto, $tipo, $marca);
 
 // set parameters and execute	
