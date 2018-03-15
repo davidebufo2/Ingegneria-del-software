@@ -21,7 +21,7 @@ function printSintesiSensore($sensore){
 		  }
 		 $media/=$count;
 		
-		echo  'Media:'.$media.' Eccezioni:'.$eccezioni.' ' ;
+		echo  'Media:',$media,' Eccezioni:',$eccezioni,' ' ;
 
 	
 		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 

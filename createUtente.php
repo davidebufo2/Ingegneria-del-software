@@ -42,15 +42,17 @@
 				<th>Telefono</th>
 				<td><input type="text" name="telefono" placeholder="+39XXXXXXX" /></td>
 			</tr>
-			<tr>
+			<input type="hidden" name="Amministratore" id="Amministratore" value="falso" />
+	<!--		<tr>
 				<th>Amministratore</th>
 				<td>
 				<input list="Amministratore" name="Amministratore" placeholder="vero o falso">
 				  <datalist id="Amministratore">
-				  <?php echo "<option value='vero'><option value='falso'>";	  ?>
+				  <?php //echo "<option value='vero'><option value='falso'>";	  ?>
 				  </datalist>
 				</td>
 			</tr>
+	-->
 			<tr>
 				<th>EmailTerzi</th>
 				<td><input type="text" name="emailTerzi" placeholder="email1,email2,email3..." /></td>

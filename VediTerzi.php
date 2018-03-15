@@ -25,17 +25,15 @@ session_start();
 				$email=htmlspecialchars($_GET['email']);
 			}
 			 $connect=$connect;//KIUWAN
-			$sql = sprintf( "SELECT utente.*, terzo.* FROM utente INNER JOIN terzo ON utente.email = terzo.emailProprietario 
+			$sql = sprintf( "SELECT terzo.emailTerzo FROM utente INNER JOIN terzo ON utente.email = terzo.emailProprietario 
 			WHERE utente.email='%s';", 
 		mysqli_real_escape_string($connect, $email));
-	
 			$result = $connect->query($sql);
+			
 			if($result->num_rows > 0){
-				$row = $result->fetch_assoc() ;
-				$elementi = explode(',', $row['emailTerzi']);//Separa
-				foreach ($elementi as $terzo) {
-					
-					 $str = <<<HTML
+				while($row = $result->fetch_assoc()){
+					$terzo=$row['emailTerzo'];
+					echo <<<HTML
 <tr id='cell'>
 <td>$terzo</td>
 	<td>
@@ -44,12 +42,12 @@ session_start();
 	</td>
 </tr>
 HTML;
- 
-   echo $str;
+
 				}
 			} else {
-				$str="<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
-				echo($str);
+				echo <<<HTML
+				<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>
+HTML;
 			}
 		?>
 		</tbody>

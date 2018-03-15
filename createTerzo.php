@@ -23,8 +23,13 @@ session_start();
 <?php
 	if(isset($_GET['nuovaMail'])===true){
 		require_once 'php_action/db_connect.php';
-		$novaMailTerzo=$_GET['emailTerzo'].','.$_GET['nuovaMail'];
-	$connect->query("UPDATE utente SET emailTerzi='$novaMailTerzo' WHERE email='".$_GET['email']."';");  
+		$emailTerzo=htmlspecialchars( $_GET['nuovaMail'] );
+		
+	$sql = sprintf( "INSERT INTO `terzo`(`emailTerzo`, `emailProprietario`) VALUES ('%s','%s');", 
+		mysqli_real_escape_string($connect, $emailTerzo),
+		mysqli_real_escape_string($connect, $_SESSION['email']) );	
+		
+	$connect->query($sql);
 	$connect->close();
 		
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);

@@ -50,7 +50,7 @@ if($selezione==='impianto'){
 	$sql = sprintf("INSERT INTO impianto ( emailProprietario, nome, locazione) VALUES ('%s', '%s', '%s')",
     $connect->real_escape_string($emailProprietario),
     $connect->real_escape_string($nome),    
-    $connect->real_escape_string($locazione)	);
+    $connect->real_escape_string($locazione));
 	
 	$connect->query($sql) ;
 	header('location:../DashboardAmministratore.php?selezione=impianto');	

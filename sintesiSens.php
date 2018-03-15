@@ -1,13 +1,12 @@
 <?php
 function getSS($sensore){	
-if (!defined('START')) define('START', 10);
-if (!defined('END')) define('END', 19);
+if (!defined('START')===true) define('START', 10);
+if (!defined('END')===true) define('END', 19);
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
 	  	 $myquery=$mysqliDB->query('SELECT valore FROM rilevazione WHERE id_sensore='.$sensore.';'); 
 		 $media=0;
 		 $count=1;
 		 $eccezioni=0;		
-		 $num_min = $media;
 		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
 			  $string=substr($obj->valore, START, END);

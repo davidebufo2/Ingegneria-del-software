@@ -13,10 +13,11 @@ session_start();
 <?php 
 	if(isset($_GET['nuovaMail'])===true){
 	require_once 'php_action/db_connect.php';
-	$emailTerzo=$_GET['emailTerzo'];
-	$sql = sprintf( "UPDATE terzo SET emailTerzo=''%s'' WHERE emailProprietario=''%s'';", 
-mysqli_real_escape_string($connect, $emailTerzo),
-mysqli_real_escape_string($connect, htmlspecialchars($_GET['email'])));
+	$emailTerzo= htmlspecialchars( $_GET['emailTerzo'] );
+	$emailTerzoNew= htmlspecialchars( $_GET['nuovaMail'] );
+	$sql = sprintf( "UPDATE terzo SET emailTerzo='%s' WHERE emailTerzo='%s';", 
+mysqli_real_escape_string($connect, $emailTerzoNew),
+mysqli_real_escape_string($connect, $emailTerzo));
 	$connect->query($sql);  
 	$connect->close();
 	

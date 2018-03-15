@@ -111,24 +111,7 @@ $mail_corpo = '
 	
 	$mail_corpo = '<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>';
 	
-												/*****       MODALITA' TESTO LIBERO            ******/	
-	
-	/*	if($result->num_rows > 0) {
-		$result = $connect->query($sql);
-		while($row = $result->fetch_assoc()) {
-			$id_impianto=$row['id_impianto'];
-			$mail_corpo .= "<p>Impianto:".$id_impianto."</p>";
-			$row2= $connect->query("SELECT * FROM sensore WHERE id_impianto=".$id_impianto.";");		
-			while ($obj = $row2->fetch_object()) {
-						$mail_corpo .= "Tipo:$obj->tipo  Marca:$obj->marca ".getSintesiSensore($obj->id)."<hr>" ;
-			}			
-		}
-	}
-*/												/*****       FINE-MODALITA' TESTO LIBERO            ******/	
-	
-	
-	
-												/*****       MODALITA' TABELLA            ******/	
+										/*****       MODALITA' TABELLA            ******/	
 		$mail_corpo.='<table border="1" cellspacing="0" cellpadding="0"><thead><tr><th>Sensore</th><th>Marca</th><th>Tipo</th><th>Sintesi</th></tr></thead>	';
 		include 'sintesiSens.php';
 	if($result->num_rows > 0) {	
@@ -182,108 +165,7 @@ $mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 																		/*		DECOMMENTARE PER DEBUG		*/
 //mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
 	
-	/*
 	
-function getStoricoSensore($sensore){
-		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-
-		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
-		mysqli_real_escape_string($mysqliDB, $sensore)
-); 
-		$myquery=$mysqliDB->query($myq);
-		
-	$num_min = 10;
-	$num_max = $num_min+9;
-		$string=''; echo $string;//echo solo per kiuwan		
-		 while ($obj = $myquery->fetch_object()) { 
-			  $string.='<br />In data:'.($obj->data).' Valore:'.(floatval(substr($obj->valore,$num_min,$num_max))).'<br />';
-			  
-		  }
-		 $myquery->close();	
-		 $mysqliDB->close();
-		return $string;
-	}
-		
-	
-	
-	function getSintesiSensore($sensore){	
-		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-	  	 $myquery=$mysqliDB->query('SELECT valore FROM rilevazione WHERE id_sensore='.$sensore.';'); 
-		 $media=0;
-		 $count=1;
-		 $eccezioni=0;		
-		 $num_min = $media;
-		/*fetch object array *
-		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, $num_min+10, $num_min+19);
-			  $media+=floatval($string);
-			  $count++;
-			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
-					//echo "eccezzione nel valore:$string<br \>";
-				  	$eccezioni++;
-				}
-		  }
-		 $media/=$count;
-		 $myquery->close();	
-		 $mysqliDB->close();
-		 return 'Media:'.$media.' Eccezioni:'.$eccezioni.' ';
-	}
-	
-*/
-	/*
-function printStoricoSensore($sensore){
-		$mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
-		mysqli_real_escape_string($mysqliDB, $sensore)); 
-		$myquery=$mysqliDB->query($myq);
-		 $string='';		
-	$num_min = 9;
-	$num_min++;
-	$num_max = 18;
-	$num_max++;
-		  while ($obj = $myquery->fetch_object()) { 
-			  $data=htmlspecialchars($obj->data);
-			  $val=htmlspecialchars(floatval(substr($obj->valore,$num_min,$num_max)));
-		  echo <<<HTML
-					<br />In data:$data Valore:$val<br />
-HTML;
-		  }
-		 $myquery->close();	
-		 $mysqliDB->close();
-		//return $string;
-	}
-		
-	
-	
-function printSintesiSensore($sensore){	
-		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
-	  	 //$myquery=$mysqliDB->query('SELECT valore FROM rilevazione WHERE id_sensore='.$sensore.';'); 
-		 $myq = sprintf( "SELECT valore FROM rilevazione WHERE id_sensore='%s';", 
-		 mysqli_real_escape_string($mysqliDB, $sensore)); 
-		 $myquery=$mysqliDB->query($myq);
-		 $media=0;
-		 $count=1;
-		 $eccezioni=0;		
-	$num_min = 9;
-	$num_min++;
-	$num_max = 18;
-	$num_max++;
-		  while ($obj = $myquery->fetch_object()) { 
-			  $string=substr($obj->valore, $num_min, $num_max);
-			  $media+=floatval($string);
-			  $count++;
-			  if (preg_match('/[^0-9]/', $string) > 0) {//LE ECCEZZIONI SONO CARATTERI, I VALORI NUMERI
-					//echo "eccezzione nel valore:$string<br \>";
-				  	$eccezioni++;
-				}
-		  }
-		 $media/=$count;
-		 $myquery->close();	
-		 $mysqliDB->close();
-		echo 'Media:',$media,' Eccezioni:',$eccezioni,' ' ;
-		// return '';
-	}
-	*/
 ?>
  </div>
 </body>
