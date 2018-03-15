@@ -17,10 +17,27 @@ if($selezione==='utente'){
 	$cognome = $_POST['cognome'];
 	$email = $_POST['email'];
 	$emailTo = $_POST['emailTo'];
-	$telefono = htmlspecialchars( $_POST['telefono'] ); $telefono=$telefono;
+	$telefono = $_POST['telefono'] ;
 		
+	
 		
-
+	// prepare and bind
+	$stmt = $connect->prepare('UPDATE `utente` SET `nome` = ?, `cognome` = ?, `email` = ?, `telefono` = ?,	`Amministratore` = ?, `emailTerzi` = ?, `password` = ? WHERE `email` = ? ');
+	$stmt->bind_param('ssssisss', $nome, $cognome, $emailTo, $telefono, $Amministratore, $emailTerzi, $password,$email );
+		$Amministratore = $_POST['Amministratore'];
+		if($Amministratore==='vero'){
+			$Amministratore=1;
+		}
+		else $Amministratore=0;
+		$emailTerzi = $_POST['emailTerzi'];
+		$password = $_POST['password'];
+		$nome = $_POST['nome'];
+		$cognome = $_POST['cognome'];
+		$email = $_POST['email'];
+		$emailTo = $_POST['emailTo'];
+		$telefono = $_POST['telefono'] ;	
+	$stmt->execute();
+/*
   	$richiesta = sprintf("UPDATE `utente` SET `nome` = '%s', `cognome` = '%s', `email` = '%s', `telefono` = '%s',	`Amministratore` = '%s', `emailTerzi` = '%s', `password` = '%s' WHERE `email` = '%s' ;" ,
   	mysqli_real_escape_string($connect, $nome),
   	mysqli_real_escape_string($connect, $cognome),
@@ -32,7 +49,7 @@ if($selezione==='utente'){
   	mysqli_real_escape_string($connect, $email));
 
 	$connect->query($richiesta) ;
-		
+*/		
 		$emailToHTML=htmlspecialchars($emailTo);
 		echo <<<HTML
 		<p>Succcessfully Updated</p>
@@ -54,12 +71,18 @@ if($selezione==='impianto'){
 	$id_impianto = $_POST['id_impianto'];
 	$nome = $_POST['nome'];
 	$locazione = $_POST['locazione'];
-	$emailProprietario = $_POST['emailProprietario']; $emailProprietario = $emailProprietario ;
+	$emailProprietario = $_POST['emailProprietario']; 
 	
-	/*$sql  = "UPDATE impianto SET nome = '$nome', locazione = '$locazione', emailProprietario = '$emailProprietario'
-			WHERE id_impianto = '".$id_impianto."' ;";
-	*/	
-	
+	$stmt = $connect->prepare('UPDATE `impianto` SET `nome` = ?, `locazione` = ?, `emailProprietario` = ?
+			WHERE `id_impianto` = ? ;');
+	$stmt->bind_param('ssss', $nome, $locazione, $emailProprietario, $id_impianto);
+		$id_impianto = $_POST['id_impianto'];
+		$nome = $_POST['nome'];
+		$locazione = $_POST['locazione'];
+		$emailProprietario = $_POST['emailProprietario']; 
+	$stmt->execute();
+		
+	/*
   	$sql = sprintf("UPDATE `impianto` SET `nome` = '%s', `locazione` = '%s', `emailProprietario` = '%s'
 			WHERE `id_impianto` = '%s' ;" ,
   	mysqli_real_escape_string($connect, $nome),
@@ -69,7 +92,7 @@ if($selezione==='impianto'){
 		
 		
 	$connect->query($sql);
-		
+	*/	
 		$impiantoToHTML=htmlspecialchars($id_impianto);
 		echo <<<HTML
 		<p>Succcessfully Updated</p> 
@@ -92,8 +115,18 @@ if($selezione==='sensore'){
 	$id_impianto = $_POST['id_impianto'];
 	$marca = $_POST['marca'];
 	$tipo = $_POST['tipo'];	  	$tipo=$tipo;
-	//$sql  = "UPDATE sensore SET id_impianto = '$id_impianto', marca = '$marca', tipo = '$tipo'	WHERE id = ".$id.' ;';
+	
 		
+	$stmt = $connect->prepare('UPDATE `sensore` SET `id_impianto` = ?, `marca` = ?, `tipo` = ?
+			WHERE `id` = ? ;');
+	$stmt->bind_param('ssss', $id_impianto, $marca, $tipo, $id);
+		$id = $_POST['id'];
+		$id_impianto = $_POST['id_impianto'];
+		$marca = $_POST['marca'];
+		$tipo = $_POST['tipo'];	  	$tipo=$tipo;
+	$stmt->execute();	
+		
+	/*	
 	$sql = sprintf("UPDATE `sensore` SET `id_impianto` = '%s', `marca` = '%s', `tipo` = '%s'
 			WHERE `id` = '%s' ;" ,
   	mysqli_real_escape_string($connect, $id_impianto),
@@ -103,7 +136,7 @@ if($selezione==='sensore'){
 		
 		
 	$connect->query($sql);
-		
+	*/	
 		$idHTML=htmlspecialchars($id);
 		echo <<<HTML
 		<p>Succcessfully Updated</p> 

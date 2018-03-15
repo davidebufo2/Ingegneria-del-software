@@ -23,10 +23,27 @@ if($selezione==='utente'){
 		}
 		else $Amministratore=0;
 	$emailTerzi = $_POST['emailTerzi'];
-	$password = htmlspecialchars($_POST['password']) ; $password=$password;
+	$password = $_POST['password'] ;
+	
 		
-	//$password = $_POST['password'] ;
-		
+	// prepare and bind
+	$stmt = $connect->prepare('INSERT INTO `utente` (`nome`, `cognome`, `telefono`, `email`, `Amministratore`, `emailTerzi`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?)');
+	$stmt->bind_param('ssssiss', $nome, $cognome, $telefono, $email, $Amministratore, $emailTerzi, $password);
+		$nome = $_POST['nome'];
+		$cognome = $_POST['cognome'];
+		$email = $_POST['email'];
+		$telefono = $_POST['telefono'];	
+		$Amministratore = $_POST['Amministratore'];
+		if($Amministratore==='vero'){
+				$Amministratore=1;
+			}
+			else $Amministratore=0;
+		$emailTerzi = $_POST['emailTerzi'];
+		$password = $_POST['password'] ;
+	$stmt->execute();		
+	header('Location:../DashboardAmministratore.php?selezione=utente');	
+	$connect->close();	
+	/*	
 	$sql = sprintf(  "INSERT INTO `utente` (`nome`, `cognome`, `telefono`, `email`, `Amministratore`, `emailTerzi`, `password`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
   	mysqli_real_escape_string($connect, $nome),
   	mysqli_real_escape_string($connect, $cognome),
@@ -39,6 +56,7 @@ if($selezione==='utente'){
 	$connect->query($sql);
 	header('location:../DashboardAmministratore.php?selezione=utente');	
 	$connect->close();		
+		*/
 	}
 }
 
@@ -46,7 +64,23 @@ if($selezione==='impianto'){
 	if(isset($_POST) === true ) {
 	$emailProprietario = $_POST['emailProprietario'];
 	$locazione = $_POST['locazione'];
-	$nome = htmlspecialchars($_POST['nome']) ;		$nome=$nome;
+	$nome = $_POST['nome'] ;
+		
+// prepare and bind
+	$stmt = $connect->prepare('INSERT INTO `impianto` ( `emailProprietario`, `nome`, `locazione`) VALUES (?, ?, ?)');
+	$stmt->bind_param('sss', $emailProprietario, $nome, $locazione);
+		$emailProprietario = $_POST['emailProprietario'];
+		$locazione = $_POST['locazione'];
+		$nome = $_POST['nome'] ;
+	$stmt->execute();		
+	header('location:../DashboardAmministratore.php?selezione=impianto');	
+	$connect->close();
+
+	/*
+	if(isset($_POST) === true ) {
+	$emailProprietario = $_POST['emailProprietario'];
+	$locazione = $_POST['locazione'];
+	$nome = $_POST['nome'] ;
 
 	$sql = sprintf("INSERT INTO `impianto` ( `emailProprietario`, `nome`, `locazione`) VALUES ('%s', '%s', '%s')",
     $connect->real_escape_string($emailProprietario),
@@ -56,6 +90,7 @@ if($selezione==='impianto'){
 	$connect->query($sql) ;
 	header('location:../DashboardAmministratore.php?selezione=impianto');	
 	$connect->close();
+	*/
 }
 }
 
@@ -66,8 +101,7 @@ if($selezione==='sensore'){
 	$marca = $_POST['marca'];
 	$tipo = $_POST['tipo'];	
 	
-	//$sql = "INSERT INTO sensore ( id_impianto, tipo, marca) VALUES ('$id_impianto', '$tipo', '$marca');";
-	// prepare and bind
+// prepare and bind
 	$stmt = $connect->prepare('INSERT INTO `sensore` ( `id_impianto`, `tipo`, `marca`) VALUES (?, ?, ?)');
 	$stmt->bind_param('iss', $id_impianto, $tipo, $marca);
 
