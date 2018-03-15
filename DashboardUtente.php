@@ -96,18 +96,18 @@ $mail_destinatario = 'emaildiprovasmtp@gmail.com';
 // definisco il subject
 $mail_oggetto = 'Messaggio MultiSEN';
 // definisco il messaggio formattato in HTML
-$mail_corpo = "
+$mail_corpo = '
 <html>
 <head>
   <title>Documento di sintesi</title>
 </head>
-<body>";
-	$id_impianto="";
+<body>';
+	$id_impianto='';
 	require_once 'php_action/db_connect.php';
-	$sql = "SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;";
+	$sql = 'SELECT * FROM utente INNER JOIN impianto ON utente.email=impianto.emailProprietario;';
 	$result = $connect->query($sql);
 	
-	$mail_corpo = "<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>";
+	$mail_corpo = '<html><body><p>Questo messaggio è stato genereato automaticamente da <i>MULTISEN</i> per favore non risponda a questo indirizzo e-mail</p>';
 
 	
 												/*****       MODALITA' TESTO LIBERO            ******/	
@@ -148,25 +148,25 @@ $mail_corpo.='</tbody>	</table>';
 														/*****     FINE - MODALITA' TABELLA            ******/		
 		
 
-$mail_corpo.="</body></html>";
+$mail_corpo.='</body></html>';
 
 // aggiusto un po' le intestazioni della mail
 // E' in questa sezione che deve essere definito il mittente (From)
 // ed altri eventuali valori come Cc, Bcc, ReplyTo e X-Mailer
-$mail_headers = "From: " .  $nome_mittente . " <" .  $mail_mittente . ">\r\n";
-$mail_headers .= "Reply-To: " .  $mail_mittente . "\r\n";
-$mail_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+$mail_headers = 'From: ' .  $nome_mittente . ' <' .  $mail_mittente . '>\r\n';
+$mail_headers .= 'Reply-To: ' .  $mail_mittente . '\r\n';
+$mail_headers .= 'X-Mailer: PHP/' . phpversion() . '\r\n';
 
 // Aggiungo alle intestazioni della mail la definizione di MIME-Version,
 // Content-type e charset (necessarie per i contenuti in HTML)
 $mail_headers .= "MIME-Version: 1.0\r\n";
-$mail_headers .= "Content-type: text/html; charset=iso-8859-1";
+$mail_headers .= 'Content-type: text/html; charset=iso-8859-1';
 
 
 	
 																//	 DECOMMENTARE PER INVIARE LE MAIL
 // INIZIO INVIO EMAIL	
-	/*
+	
 	$sql = "SELECT * FROM terzo WHERE `emailProprietario`='".$email."';";
 	$result = $connect->query($sql);		
 	if($result->num_rows > 0) {
@@ -177,12 +177,12 @@ $mail_headers .= "Content-type: text/html; charset=iso-8859-1";
 			mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers);
 		}	
 	}
-	*/
+	
 // FINE INVIO EMAIL
 	
 	
-																		/*		DECOMMENTARE PER DEBUG		*/
-mail("davidebufo@gmail.com", $mail_oggetto, $mail_corpo, $mail_headers);
+/*		DECOMMENTARE PER DEBUG		*/
+//mail('davidebufo@gmail.com', $mail_oggetto, $mail_corpo, $mail_headers);
 	
 	
 ?>
