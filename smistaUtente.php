@@ -4,8 +4,8 @@ include 'nocsrf.php';
 
  $csrf = new nocsrf;
 
-  if (isset($_POST['email'])) {
-    if($csrf->check('csrf_token', $_POST, false, 60*19, true)===true) { // FIXED
+  if (isset($_POST['email'])===true) {
+    if($csrf->check('csrf_token', $_POST, false, true, true)===true) { // FIXED
       // ... sensitive PHP code follows here ...
 			/*-- CONNESSIONE MYSQL host, utente, password, nomeDB ---*/
 	$mysqli = new mysqli('localhost', 'root', '', 'ingsw');
@@ -46,4 +46,3 @@ include 'nocsrf.php';
 
 // Generate CSRF token to use in form hidden field
 $token = NoCSRF::generate( 'csrf_token' );
-die(); 

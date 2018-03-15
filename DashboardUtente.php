@@ -60,8 +60,8 @@ HTML;
 				printf ($report);		
 				//$report.=getSintesiSensore($s_id);
 				//$report.=getStoricoSensore($s_id);
+				include_once'printSintesi.php';
 				printSintesiSensore($s_id);
-				printStoricoSensore($s_id);
 				
 				//printf ($report);
 				echo <<<HTML
@@ -237,6 +237,9 @@ function getStoricoSensore($sensore){
 		 $mysqliDB->close();
 		 return 'Media:'.$media.' Eccezioni:'.$eccezioni.' ';
 	}
+	
+	
+	/*
 function printStoricoSensore($sensore){
 		$mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
 		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
@@ -247,7 +250,6 @@ function printStoricoSensore($sensore){
 	$num_min++;
 	$num_max = 18;
 	$num_max++;
-		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
 			  $data=htmlspecialchars($obj->data);
 			  $val=htmlspecialchars(floatval(substr($obj->valore,$num_min,$num_max)));
@@ -275,7 +277,6 @@ function printSintesiSensore($sensore){
 	$num_min++;
 	$num_max = 18;
 	$num_max++;
-		/*fetch object array */
 		  while ($obj = $myquery->fetch_object()) { 
 			  $string=substr($obj->valore, $num_min, $num_max);
 			  $media+=floatval($string);
@@ -286,13 +287,12 @@ function printSintesiSensore($sensore){
 				}
 		  }
 		 $media/=$count;
-			/* free row set */
 		 $myquery->close();	
 		 $mysqliDB->close();
 		echo 'Media:',$media,' Eccezioni:',$eccezioni,' ' ;
 		// return '';
 	}
-	
+	*/
 ?>
  </div>
 </body>

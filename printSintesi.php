@@ -1,5 +1,6 @@
 <?php 
-
+define('NUM_MIN', 10);
+define('NUM_MAX', 19);
 function printSintesiSensore($sensore){			
 		 $mysqliDB = new mysqli('localhost', 'root', '', 'ingsw');
 		 $myq = sprintf( "SELECT valore FROM rilevazione WHERE id_sensore='%s';", 
@@ -19,8 +20,25 @@ function printSintesiSensore($sensore){
 				}
 		  }
 		 $media/=$count;
-		 $myquery->close();	
-		 $mysqliDB->close();
-		return 'Media:'.$media.' Eccezioni:'.$eccezioni.' ' ;
+		
+		echo  'Media:'.$media.' Eccezioni:'.$eccezioni.' ' ;
+
+	
+		$myq = sprintf( "SELECT valore,data FROM rilevazione WHERE id_sensore='%s';", 
+		mysqli_real_escape_string($mysqliDB, $sensore)); 
+		$myquery=$mysqliDB->query($myq);
+		
+		/*fetch object array */
+		  while ($obj = $myquery->fetch_object()) { 
+			  $data=htmlspecialchars($obj->data);
+			  $val=htmlspecialchars(floatval(substr($obj->valore,NUM_MIN,NUM_MAX)));
+		  echo <<<HTML
+					<br />In data:$data Valore:$val<br />
+HTML;
+		  }
+	
+	$myquery->close();	
+	$mysqliDB->close();
+	
 }
 	

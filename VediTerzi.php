@@ -24,6 +24,7 @@ session_start();
 			if(isset($_GET['email'])===true){
 				$email=htmlspecialchars($_GET['email']);
 			}
+			 $connect=$connect;//KIUWAN
 			$sql = sprintf( "SELECT utente.*, terzo.* FROM utente INNER JOIN terzo ON utente.email = terzo.emailProprietario 
 			WHERE utente.email='%s';", 
 		mysqli_real_escape_string($connect, $email));

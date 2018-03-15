@@ -6,10 +6,10 @@ require_once 'db_connect.php';
   $csrf = new nocsrf;
 
   if (isset($_POST['selezione']) === true) {
-	  define("TIME_SEC",    9);
-    if($csrf->check('csrf_token', $_POST, false, TIME_SEC, true) === true) { // FIXED
+    if($csrf->check('csrf_token', $_POST, false, true, true) === true) { // FIXED
       
 $selezione=$_POST['selezione'];
+		
 		
 if($selezione==='utente'){
 	if(isset($_POST) === true ) {
@@ -35,18 +35,9 @@ if($selezione==='utente'){
   	mysqli_real_escape_string($connect, $emailTerzi),
   	mysqli_real_escape_string($connect, $password));
 
-		
-		
-/*	$sql = "INSERT INTO utente (nome, cognome, telefono, email, Amministratore, emailTerzi, password) VALUES ('$nome', '$cognome', '$telefono', '$email', '$Amministratore', '$emailTerzi', '$password')";
-*/		
-	if($connect->query($sql) === true) {
-		//header('location:../indexUtente.php');	
-		header('location:../DashboardAmministratore.php?selezione=utente');	
-	} else {
-		exit();
-	}
-	$connect->close();
-		
+	$connect->query($sql);
+	header('location:../DashboardAmministratore.php?selezione=utente');	
+	$connect->close();		
 	}
 }
 
@@ -61,11 +52,9 @@ if($selezione==='impianto'){
     $connect->real_escape_string($nome),    
     $connect->real_escape_string($locazione)	);
 	
-	if($connect->query($sql) === true) {
-		header('location:../DashboardAmministratore.php?selezione=impianto');	
-	} 
+	$connect->query($sql) ;
+	header('location:../DashboardAmministratore.php?selezione=impianto');	
 	$connect->close();
-	exit();
 }
 }
 
@@ -87,60 +76,16 @@ if($selezione==='sensore'){
 	$tipo = $_POST['tipo'];	
 	$stmt->execute();	
 	header('location:../DashboardAmministratore.php?selezione=sensore');	
-
-
 	$connect->close();
-	exit();
+	
 	}
 }
     }
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-require_once 'db_connect.php';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-
+require_once 'db_connect.php';
 $selezione=$_POST['selezione'];
 if($selezione==='utente'){
 	if(isset($_POST) === true ) {

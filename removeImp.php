@@ -17,7 +17,6 @@ require_once 'php_action/db_connect.php';
 		header('location:./DashboardAmministratore.php?selezione=impianto');	
 	} 
 	$connect->close();
-	die();
 	?>
 </body>
 </html>

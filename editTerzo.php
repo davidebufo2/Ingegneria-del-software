@@ -22,7 +22,6 @@ mysqli_real_escape_string($connect, htmlspecialchars($_GET['email'])));
 	
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);
 	header('Location:VediTerzi.php');
-		die();	
 	}
 ?>
 	

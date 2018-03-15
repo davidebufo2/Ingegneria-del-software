@@ -7,6 +7,5 @@ mysqli_real_escape_string($connect, $emailTerzo));
 	$connect->query($sql);  
 	$connect->close();
 	header('Location:VediTerzi.php');
-	die();
 
 	//header('location:VediTerzi.php?email='.$_GET['email']);
