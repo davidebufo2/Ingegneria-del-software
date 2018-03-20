@@ -45,4 +45,4 @@ include 'nocsrf.php';
 
 
 // Generate CSRF token to use in form hidden field
-$token = NoCSRF::generate( 'csrf_token' );
+//$token = NoCSRF::generate( 'csrf_token' );
