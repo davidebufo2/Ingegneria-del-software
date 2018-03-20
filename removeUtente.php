@@ -18,7 +18,7 @@ require_once 'php_action/db_connect.php';
 		echo($str);
 		header('location:./DashboardAmministratore.php?selezione=utente');
 	} 
-	$connect->close();
+	//$connect->close();
 	?>
 </body>
 </html>
