@@ -19,7 +19,7 @@ session_start();
 mysqli_real_escape_string($connect, $emailTerzoNew),
 mysqli_real_escape_string($connect, $emailTerzo));
 	$connect->query($sql);  
-	$connect->close();
+	//$connect->close();
 	
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);
 	header('Location:VediTerzi.php');

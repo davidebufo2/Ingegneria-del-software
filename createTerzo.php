@@ -30,7 +30,7 @@ session_start();
 		mysqli_real_escape_string($connect, $_SESSION['email']) );	
 		
 	$connect->query($sql);
-	$connect->close();
+	//$connect->close();
 		
 	$_SESSION['email'] = htmlspecialchars($_GET['email']);
 	header('Location:VediTerzi.php');
