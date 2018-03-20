@@ -30,7 +30,7 @@ include 'nocsrf.php';
 		}
 		else {
 			$_SESSION['email'] = $email;
-			header('Location: DashboardUtente.php');//se flagAmministratore=false;
+			header('Location: DashboardProprietario.php');//se flagAmministratore=false;
 		}
 	}
 	else{
