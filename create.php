@@ -42,7 +42,7 @@ if($selezione==='utente'){
 		$password = $_POST['password'] ;
 	$stmt->execute();		
 	header('Location:../DashboardAmministratore.php?selezione=utente');	
-	$connect->close();	
+	//$connect->close();	
 	/*	
 	$sql = sprintf(  "INSERT INTO `utente` (`nome`, `cognome`, `telefono`, `email`, `Amministratore`, `emailTerzi`, `password`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
   	mysqli_real_escape_string($connect, $nome),
@@ -74,7 +74,7 @@ if($selezione==='impianto'){
 		$nome = $_POST['nome'] ;
 	$stmt->execute();		
 	header('location:../DashboardAmministratore.php?selezione=impianto');	
-	$connect->close();
+	//$connect->close();
 
 	/*
 	if(isset($_POST) === true ) {
@@ -111,7 +111,7 @@ if($selezione==='sensore'){
 	$tipo = $_POST['tipo'];	
 	$stmt->execute();	
 	header('location:../DashboardAmministratore.php?selezione=sensore');	
-	$connect->close();
+	//$connect->close();
 	
 	}
 }
